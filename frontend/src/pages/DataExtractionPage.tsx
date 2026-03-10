@@ -97,7 +97,7 @@ export default function DataExtractionPage() {
 
   const timerDone = secondsRemaining === 0;
   const excelDownloadUrl = session?.excelUrl || `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/output/output.xlsx`;
-  const showReportCard = timerDone && !isProcessing && allFiles.length > 0;
+  const showReportCard = timerDone && allFiles.length > 0;
 
   return (
     <div className="space-y-6">
@@ -240,13 +240,11 @@ export default function DataExtractionPage() {
                       </button>
                       <button
                         onClick={() => {
-                          if (session?.excelUrl) {
-                            window.open(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${session.excelUrl}`, '_blank');
-                          }
+                          window.open(excelDownloadUrl, '_blank');
                         }}
-                        disabled={!session?.excelUrl || row.status !== 'Completed'}
+                        disabled={!timerDone}
                         className="p-1.5 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-amber-50 text-gray hover:text-amber-600 transition"
-                        title="Download Excel Report"
+                        title="Download Global Excel Report"
                       >
                         <Download className="w-4 h-4" />
                       </button>
