@@ -78,26 +78,24 @@ export default function DataExtractionPage() {
   }
 
   const isProcessing = allFiles.some((f) => f.status === 'processing');
-  const [timerDone, setTimerDone] = useState(false);
   const [secondsRemaining, setSecondsRemaining] = useState(6);
+  const [countdownStarted, setCountdownStarted] = useState(false);
 
-  // 6-second artificial delay for "Premium" experience
+  // Start countdown immediately on mount if we have files
   useEffect(() => {
-    if (isProcessing) {
-      setTimerDone(false);
-      setSecondsRemaining(6);
+    if (allFiles.length > 0 && !countdownStarted) {
+      setCountdownStarted(true);
     }
-  }, [isProcessing]);
+  }, [allFiles.length, countdownStarted]);
 
   useEffect(() => {
-    if (secondsRemaining > 0) {
+    if (countdownStarted && secondsRemaining > 0) {
       const timer = setTimeout(() => setSecondsRemaining(prev => prev - 1), 1000);
       return () => clearTimeout(timer);
-    } else {
-      setTimerDone(true);
     }
-  }, [secondsRemaining]);
+  }, [countdownStarted, secondsRemaining]);
 
+  const timerDone = secondsRemaining === 0;
   const excelDownloadUrl = session?.excelUrl || `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/output/output.xlsx`;
   const showReportCard = timerDone && !isProcessing && allFiles.length > 0;
 
@@ -108,7 +106,9 @@ export default function DataExtractionPage() {
         <div>
           <h1 className="text-2xl font-bold text-dark">Document Analysis Results</h1>
           <p className="text-sm text-gray mt-1">
-            {isProcessing ? 'Processing your documents...' : !timerDone ? `Finalizing your premium report (${secondsRemaining}s)...` : 'Your data has been extracted and is ready for export.'}
+            {showReportCard
+              ? 'Your data has been extracted and is ready for export.'
+              : `Processing documents and finalizing report (${secondsRemaining}s)...`}
           </p>
         </div>
       </div>
@@ -135,14 +135,14 @@ export default function DataExtractionPage() {
             Export as Excel Sheets
           </a>
         </Card>
-      ) : (isProcessing || !timerDone) && (
+      ) : allFiles.length > 0 && (
         <Card className="p-6 border-blue-100 bg-blue-50/30 flex items-center gap-4 animate-pulse">
           <div className="w-10 h-10 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin" />
           <div>
             <h3 className="text-md font-semibold text-blue-900">
-              {isProcessing ? 'Extracting AI Data...' : `Finalizing Excel Report (${secondsRemaining}s)...`}
+              {isProcessing ? `Analyzing Documents (${secondsRemaining}s)...` : `Finalizing Excel Report (${secondsRemaining}s)...`}
             </h3>
-            <p className="text-xs text-blue-700">Please do not refresh the page while we finalize your output.</p>
+            <p className="text-xs text-blue-700">Please do not refresh the page. Your premium report is almost ready.</p>
           </div>
         </Card>
       )}
