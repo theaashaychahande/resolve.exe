@@ -23,7 +23,7 @@ export default function HeroSection() {
   return (
     <section
       className="relative overflow-hidden pt-16"
-      style={{ background: 'linear-gradient(135deg, #0F3D2E 0%, #0E5F4B 40%, #1F7A63 100%)' }}
+      style={{ background: 'linear-gradient(135deg, #0B231A 0%, #153A2D 50%, #0B231A 100%)' }}
     >
       {/* Animated background elements */}
       <div className="absolute top-20 right-20 w-[700px] h-[700px] bg-white/5 rounded-full blur-3xl animate-pulse-soft" />
@@ -53,7 +53,7 @@ export default function HeroSection() {
           {/* Left — Text content */}
           <div className="animate-fade-in-up">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-primary-light text-xs font-semibold px-5 py-2.5 rounded-full mb-8 border border-white/10">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-[#6BC16B] text-xs font-semibold px-5 py-2.5 rounded-full mb-8 border border-white/10">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Next-Gen AI Document Intelligence</span>
               <span className="bg-primary/20 text-white text-[10px] px-2 py-0.5 rounded-full ml-1 font-bold">NEW</span>
@@ -63,9 +63,9 @@ export default function HeroSection() {
               Transform Documents
               <br />
               into <span className="relative">
-                <span className="text-primary-light">Structured Data</span>
+                <span className="text-[#6BC16B]">Structured Data</span>
                 <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 8" fill="none">
-                  <path d="M1 5.5C47 2 153 2 199 5.5" stroke="#2D5444" strokeWidth="3" strokeLinecap="round" />
+                  <path d="M1 5.5C47 2 153 2 199 5.5" stroke="#6BC16B" strokeWidth="3" strokeLinecap="round" />
                 </svg>
               </span>
               <br />
@@ -73,7 +73,7 @@ export default function HeroSection() {
             </h1>
 
             <p className="text-lg lg:text-xl text-white/50 leading-relaxed mb-10 max-w-xl">
-              Upload documents and instantly extract critical information using AI-powered OCR and NLP. 
+              Upload documents and instantly extract critical information using AI-powered OCR and NLP.
               Automate your entire document processing workflow — from intake to structured output — in seconds.
             </p>
 
@@ -83,7 +83,7 @@ export default function HeroSection() {
                 href="http://localhost:8501"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 bg-[#2D5444] hover:bg-[#1b3a2f] text-white font-bold px-9 py-4.5 rounded-xl shadow-xl shadow-[#2D5444]/30 transition-all hover:shadow-2xl hover:shadow-[#2D5444]/40 hover:-translate-y-0.5 text-base"
+                className="inline-flex items-center gap-2.5 bg-[#6BC16B] hover:bg-[#5bb05b] text-[#0B231A] font-bold px-9 py-4.5 rounded-xl shadow-xl shadow-[#6BC16B]/20 transition-all hover:shadow-2xl hover:shadow-[#6BC16B]/30 hover:-translate-y-0.5 text-base"
               >
                 Start Free <ArrowRight className="w-5 h-5" />
               </a>
@@ -108,15 +108,15 @@ export default function HeroSection() {
             {/* Mini social proof */}
             <div className="mt-10 flex items-center gap-4">
               <div className="flex -space-x-2.5">
-                {[0,1,2,3,4].map((i) => (
-                  <div key={i} className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm" style={{ background: ['#2D5444','#1b3a2f','#0B231A','#224236','#0E5F4B'][i] }}>
-                    {['RK','AP','SM','JD','NS'][i]}
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <div key={i} className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm" style={{ background: ['#2D5444', '#1b3a2f', '#0B231A', '#224236', '#0E5F4B'][i] }}>
+                    {['RK', 'AP', 'SM', 'JD', 'NS'][i]}
                   </div>
                 ))}
               </div>
               <div>
                 <div className="flex items-center gap-0.5 mb-0.5">
-                  {[0,1,2,3,4].map(i => <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />)}
+                  {[0, 1, 2, 3, 4].map(i => <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />)}
                 </div>
                 <p className="text-xs text-gray-400"><span className="text-gray-700 font-bold">500+</span> organizations trust DRISHTI</p>
               </div>
@@ -225,9 +225,8 @@ export default function HeroSection() {
                         className="flex items-center gap-3 px-4 py-2 border-b border-gray-50 last:border-0 hover:bg-gray-50/50"
                       >
                         <div
-                          className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                            item.status === 'done' ? 'bg-green-500' : 'bg-amber-400 animate-pulse'
-                          }`}
+                          className={`w-2 h-2 rounded-full flex-shrink-0 ${item.status === 'done' ? 'bg-green-500' : 'bg-amber-400 animate-pulse'
+                            }`}
                         />
                         <span className="text-[10px] text-gray-700 font-medium flex-1 truncate">{item.doc}</span>
                         <span className="text-[8px] text-gray-300 bg-gray-50 px-1.5 py-0.5 rounded">{item.type}</span>
@@ -304,23 +303,23 @@ export default function HeroSection() {
       </div>
 
       {/* Stats bar */}
-      <div className="relative border-t border-gray-100 bg-gray-50/50 backdrop-blur-sm">
+      <div className="relative border-t border-white/5 bg-[#0B231A]/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
             {[
               { value: '10K+', label: 'Documents Processed', icon: FileText },
               { value: '98.5%', label: 'Extraction Accuracy', icon: Target },
               { value: '500+', label: 'Organizations', icon: Users },
-              { value: '<2s', label: 'Processing Time', icon: Clock },
+              { value: '<10s', label: 'Processing Time', icon: Clock },
               { value: '3', label: 'Languages Supported', icon: Globe },
               { value: '50+', label: 'Document Types', icon: Brain },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <stat.icon className="w-5 h-5 text-primary-dark" />
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mx-auto mb-3">
+                  <stat.icon className="w-5 h-5 text-[#6BC16B]" />
                 </div>
-                <p className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-1">{stat.value}</p>
-                <p className="text-xs text-gray-500">{stat.label}</p>
+                <p className="text-2xl sm:text-3xl font-extrabold text-white mb-1">{stat.value}</p>
+                <p className="text-xs text-white/40">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -328,12 +327,12 @@ export default function HeroSection() {
       </div>
 
       {/* Trusted by section */}
-      <div className="relative border-t border-gray-100 bg-gray-50/30">
+      <div className="relative border-t border-white/5 bg-[#0B231A]/90">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-xs text-gray-400 uppercase tracking-widest font-bold mb-6">Trusted by leading organizations across India</p>
           <div className="flex items-center justify-center flex-wrap gap-x-12 gap-y-4">
             {trustLogos.map((name) => (
-              <div key={name} className="flex items-center gap-2 text-gray-400 hover:text-primary transition-colors cursor-default">
+              <div key={name} className="flex items-center gap-2 text-white/20 hover:text-[#6BC16B] transition-colors cursor-default">
                 <BarChart3 className="w-4 h-4" />
                 <span className="text-sm font-bold tracking-wide">{name}</span>
               </div>

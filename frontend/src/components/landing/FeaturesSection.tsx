@@ -54,9 +54,9 @@ const features = [
   {
     icon: Zap,
     title: 'Lightning Fast Processing',
-    desc: 'Process documents in under 2 seconds with our optimized AI pipeline. Batch upload hundreds of documents and get results in minutes, not hours.',
+    desc: 'Process documents in under 10 seconds with our optimized AI pipeline. Batch upload hundreds of documents and get results in minutes, not hours.',
     gradient: 'from-primary to-primary-soft',
-    highlights: ['<2s Processing', 'Batch Upload', 'Queue Management'],
+    highlights: ['<10s Processing', 'Batch Upload', 'Queue Management'],
   },
 ];
 
@@ -84,17 +84,19 @@ export default function FeaturesSection() {
           {features.map((f, i) => (
             <div
               key={i}
-              className="group bg-primary-soft border border-gray-100 rounded-2xl p-8 hover:shadow-2xl hover:shadow-gray-200/60 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+              className="group bg-primary-soft border-[2.5px] border-[#2D5444] rounded-2xl p-8 hover:bg-[#6BC16B]/5 hover:shadow-2xl hover:shadow-gray-900/40 active:bg-[#6BC16B]/10 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden cursor-pointer"
             >
               {/* Background decoration on hover */}
               <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${f.gradient} opacity-0 group-hover:opacity-[0.04] rounded-bl-full transition-opacity duration-500`} />
 
               <div
-                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${f.gradient} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                className={`w-14 h-14 rounded-xl bg-white flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}
               >
-                <f.icon className="w-7 h-7 text-white" />
+                <f.icon className="w-7 h-7 text-[#2D5444]" />
               </div>
-              <h3 className="text-xl font-bold text-black mb-3">{f.title}</h3>
+              <div className="inline-block bg-[#6BC16B]/10 px-4 py-1.5 rounded-lg mb-3">
+                <h3 className="text-xl font-bold text-black">{f.title}</h3>
+              </div>
               <p className="text-sm text-gray-600 leading-relaxed mb-5">{f.desc}</p>
 
               {/* Feature highlights */}
@@ -108,7 +110,7 @@ export default function FeaturesSection() {
 
               <Link
                 to="/dashboard"
-                className="inline-flex items-center gap-2.5 bg-primary hover:bg-[#1ea34e] text-white font-bold px-10 py-5 rounded-xl shadow-xl shadow-primary/30 transition-all hover:-translate-y-0.5 text-lg"
+                className="inline-flex items-center gap-2.5 bg-[#6BC16B] hover:bg-[#5bb05b] text-[#0B231A] font-bold px-10 py-5 rounded-xl shadow-xl shadow-[#6BC16B]/10 transition-all hover:-translate-y-0.5 text-lg"
               >
                 Try It Now — Free <ArrowRight className="w-5 h-5" />
               </Link>
@@ -117,25 +119,25 @@ export default function FeaturesSection() {
         </div>
 
         {/* Product showcase grid */}
-        <div className="relative bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 shadow-2xl overflow-hidden group/container">
+        <div className="relative bg-[#2D5444] rounded-3xl p-8 sm:p-12 border border-white/10 shadow-2xl overflow-hidden group/container">
           {/* Subtle background decoration */}
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl transition-transform duration-700 group-hover/container:scale-110" />
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl transition-transform duration-700 group-hover/container:scale-110" />
 
           <div className="relative">
             <div className="text-center mb-12">
-              <h3 className="text-2xl sm:text-3xl font-bold text-black mb-3">And so much more...</h3>
-              <p className="text-gray-600 max-w-lg mx-auto">Every tool your team needs for complete document intelligence, from intake to insight.</p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">And so much more...</h3>
+              <p className="text-white/60 max-w-lg mx-auto">Every tool your team needs for complete document intelligence, from intake to insight.</p>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {showcaseFeatures.map((f, i) => (
-                <div key={i} className="flex items-start gap-4 bg-primary-soft border border-primary-light hover:border-primary hover:bg-primary-light rounded-xl p-5 transition-all duration-300 group/item hover:-translate-y-1">
-                  <div className="w-11 h-11 rounded-lg bg-primary-soft flex items-center justify-center flex-shrink-0 shadow-sm group-hover/item:scale-110 border border-primary">
-                    <f.icon className="w-5 h-5 text-primary-dark" />
+                <div key={i} className="flex items-start gap-4 bg-white/5 border border-white/10 hover:border-[#6BC16B] hover:bg-white/10 rounded-xl p-5 transition-all duration-300 group/item hover:-translate-y-1">
+                  <div className="w-11 h-11 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 shadow-sm group-hover/item:scale-110 border border-white/10">
+                    <f.icon className="w-5 h-5 text-[#6BC16B]" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-black mb-1 text-sm">{f.label}</h4>
-                    <p className="text-xs text-gray-500 leading-relaxed">{f.desc}</p>
+                    <h4 className="font-semibold text-white mb-1 text-sm">{f.label}</h4>
+                    <p className="text-xs text-white/40 leading-relaxed">{f.desc}</p>
                   </div>
                 </div>
               ))}

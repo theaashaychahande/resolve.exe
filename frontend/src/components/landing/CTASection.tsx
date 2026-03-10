@@ -8,7 +8,7 @@ export default function CTASection() {
         <div
           className="rounded-3xl px-8 sm:px-16 py-16 sm:py-24 shadow-2xl shadow-primary-deep/20 relative overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #0F3D2E 0%, #0E5F4B 40%, #1F7A63 100%)',
+            background: 'linear-gradient(135deg, #0B231A 0%, #153A2D 50%, #0B231A 100%)',
           }}
         >
           {/* Dot grid overlay */}
@@ -25,8 +25,8 @@ export default function CTASection() {
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/[0.03] rounded-full translate-y-1/2 -translate-x-1/2" />
 
           <div className="relative text-center">
-            <div className="inline-flex items-center gap-2 bg-primary/5 text-primary-dark text-xs font-bold px-5 py-2.5 rounded-full mb-8 border border-primary/10">
-              <Clock className="w-3.5 h-3.5" /> Get started in under 2 minutes
+            <div className="inline-flex items-center gap-2 bg-white/10 text-white/60 text-xs font-bold px-5 py-2.5 rounded-full mb-8 border border-white/10">
+              <Clock className="w-3.5 h-3.5 text-[#6BC16B]" /> Get started in under 2 minutes
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
@@ -42,17 +42,17 @@ export default function CTASection() {
             {/* CTA Buttons */}
             <div className="flex flex-wrap justify-center gap-4 mb-10">
               <Link
-                to="/dashboard"
-                className="inline-flex items-center gap-2.5 bg-primary hover:bg-[#1ea34e] text-white font-bold px-10 py-5 rounded-xl shadow-xl shadow-primary/30 transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 text-lg group"
+                to="/dashboard/upload"
+                className="inline-flex items-center gap-2.5 bg-[#6BC16B] hover:bg-[#5bb05b] text-[#0B231A] font-bold px-10 py-5 rounded-xl shadow-xl shadow-[#6BC16B]/20 transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#6BC16B]/30 text-lg group"
               >
                 Try It Now — Free <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a
-                href="#pricing"
+              <button
+                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
                 className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 text-white font-semibold px-10 py-5 rounded-xl border border-white/20 transition-all hover:-translate-y-0.5 text-lg"
               >
                 View Pricing
-              </a>
+              </button>
             </div>
 
             {/* Trust signals */}
@@ -66,7 +66,7 @@ export default function CTASection() {
             <div className="grid sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
               {[
                 { icon: FileText, label: '50+ Document Types', desc: 'IDs, invoices, certificates & more' },
-                { icon: Zap, label: 'Instant Processing', desc: 'Results in under 2 seconds' },
+                { icon: Zap, label: 'Instant Processing', desc: 'Results in under 10 seconds' },
                 { icon: Shield, label: 'Enterprise Security', desc: 'AES-256 encryption standard' },
               ].map((f, i) => (
                 <div key={i} className="bg-white/[0.06] rounded-xl p-4 border border-white/5">

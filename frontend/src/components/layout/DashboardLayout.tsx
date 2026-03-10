@@ -5,7 +5,6 @@ import {
   Database,
   BarChart3,
   Download,
-  Settings,
   Menu,
   X,
   FileText,
@@ -21,7 +20,6 @@ const navItems: NavItem[] = [
   { to: '/dashboard/data', icon: Database, label: 'Extracted Data' },
   { to: '/dashboard/analytics', icon: BarChart3, label: 'Analytics' },
   { to: '/dashboard/export', icon: Download, label: 'Export Data' },
-  { to: '/dashboard/settings', icon: Settings, label: 'Settings' },
 ];
 
 export default function DashboardLayout() {
@@ -140,13 +138,6 @@ export default function DashboardLayout() {
 
             {profileOpen && (
               <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-border py-2 z-50">
-                <Link
-                  to="/dashboard/settings"
-                  className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-primary-soft"
-                  onClick={() => setProfileOpen(false)}
-                >
-                  <Settings className="w-4 h-4" /> Settings
-                </Link>
                 <Link
                   to="/"
                   className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50"

@@ -37,7 +37,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'linear-gradient(135deg, #0F3D2E 0%, #0E5F4B 100%)' }}>
+    <footer style={{ background: 'linear-gradient(135deg, #0B231A 0%, #153A2D 100%)' }}>
       {/* Newsletter section */}
       <div className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -52,7 +52,7 @@ export default function Footer() {
                 placeholder="Enter your email address"
                 className="flex-1 bg-white/10 border border-white/10 rounded-l-xl px-5 py-3.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary/50 transition"
               />
-              <button className="bg-primary hover:bg-[#1ea34e] text-white font-semibold px-6 py-3.5 rounded-r-xl transition-colors flex items-center gap-2 text-sm">
+              <button className="bg-[#6BC16B] hover:bg-[#5bb05b] text-[#0B231A] font-bold px-6 py-3.5 rounded-r-xl transition-colors flex items-center gap-2 text-sm">
                 Subscribe <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -66,8 +66,8 @@ export default function Footer() {
           {/* Brand column — spans 2 cols */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
-                <FileText className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-xl bg-[#6BC16B] flex items-center justify-center shadow-lg shadow-[#6BC16B]/10">
+                <FileText className="w-5 h-5 text-[#0B231A]" />
               </div>
               <span className="text-xl font-bold text-white tracking-tight">DRISHTI</span>
             </div>

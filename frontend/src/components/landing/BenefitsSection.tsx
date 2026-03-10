@@ -5,7 +5,7 @@ const benefits = [
   {
     icon: Zap,
     title: 'Faster Processing',
-    desc: 'Process documents 10x faster than manual data entry. Our AI pipeline handles complex documents in under 2 seconds.',
+    desc: 'Process documents 10x faster than manual data entry. Our AI pipeline handles complex documents in under 10 seconds.',
     stat: '10x',
     statLabel: 'Faster',
     color: '#22C55E',
@@ -47,7 +47,7 @@ export default function BenefitsSection() {
   return (
     <section
       className="py-24 lg:py-32 relative overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #0F3D2E 0%, #0E5F4B 50%, #1F7A63 100%)' }}
+      style={{ background: 'linear-gradient(135deg, #0B231A 0%, #153A2D 50%, #0B231A 100%)' }}
     >
       {/* Dot grid overlay */}
       <div
@@ -97,7 +97,7 @@ export default function BenefitsSection() {
           {additionalBenefits.map((b, i) => (
             <div key={i} className="flex items-start gap-4 bg-white/[0.04] rounded-xl p-5 border border-white/5 hover:bg-white/[0.08] transition-all">
               <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
-                <b.icon className="w-5 h-5 text-primary-light" />
+                <b.icon className="w-5 h-5 text-[#6BC16B]" />
               </div>
               <div>
                 <h4 className="font-semibold text-white text-sm mb-1">{b.title}</h4>
@@ -112,7 +112,7 @@ export default function BenefitsSection() {
           <h3 className="text-xl font-bold text-white text-center mb-8">Manual vs DRISHTI Processing</h3>
           <div className="space-y-6 max-w-3xl mx-auto">
             {[
-              { label: 'Processing Speed', manual: '15 min/doc', drishti: '< 2 sec/doc', manualWidth: 12, drishtiWidth: 95 },
+              { label: 'Processing Speed', manual: '15 min/doc', drishti: '< 10 sec/doc', manualWidth: 12, drishtiWidth: 95 },
               { label: 'Data Accuracy', manual: '85-90%', drishti: '98.5%+', manualWidth: 55, drishtiWidth: 98 },
               { label: 'Cost per Document', manual: '₹50-100', drishti: '₹2-5', manualWidth: 80, drishtiWidth: 15 },
               { label: 'Scalability', manual: 'Limited', drishti: 'Unlimited', manualWidth: 25, drishtiWidth: 100 },
@@ -130,7 +130,7 @@ export default function BenefitsSection() {
                     <div className="h-full bg-white/20 rounded-full transition-all duration-1000" style={{ width: `${item.manualWidth}%` }} />
                   </div>
                   <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-primary-dark to-primary rounded-full transition-all duration-1000" style={{ width: `${item.drishtiWidth}%` }} />
+                    <div className="h-full bg-[#6BC16B] rounded-full transition-all duration-1000" style={{ width: `${item.drishtiWidth}%` }} />
                   </div>
                 </div>
               </div>

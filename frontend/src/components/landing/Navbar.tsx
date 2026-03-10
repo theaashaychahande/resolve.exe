@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FileText, Menu, X } from 'lucide-react';
 
@@ -18,16 +18,6 @@ const scrollToSection = (href: string) => {
 
 export default function Navbar() {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  // Monitor scroll for premium navbar effects
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -73,7 +63,7 @@ export default function Navbar() {
               href="http://localhost:8501"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center bg-[#2D5444] hover:bg-[#1b3a2f] text-white font-bold px-8 py-2.5 rounded-xl shadow-lg shadow-[#2D5444]/10 transition-all text-[15px]"
+              className="inline-flex items-center bg-[#6BC16B] hover:bg-[#5bb05b] text-[#0A231A] font-bold px-8 py-2.5 rounded-xl shadow-lg shadow-[#6BC16B]/10 transition-all text-[15px]"
             >
               Start Free
             </a>
@@ -106,7 +96,7 @@ export default function Navbar() {
             href="http://localhost:8501"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full text-center text-sm font-medium text-white bg-[#2D5444] px-5 py-2.5 rounded-lg"
+            className="block w-full text-center text-sm font-bold text-[#0A231A] bg-[#6BC16B] px-5 py-2.5 rounded-lg"
           >
             Start Free
           </a>

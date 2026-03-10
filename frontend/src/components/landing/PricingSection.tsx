@@ -105,12 +105,12 @@ export default function PricingSection() {
               }`}
               style={
                 p.popular
-                  ? { background: 'linear-gradient(135deg, #0F3D2E 0%, #0E5F4B 50%, #1F7A63 100%)' }
+                  ? { background: 'linear-gradient(135deg, #0B231A 0%, #153A2D 50%, #0B231A 100%)' }
                   : undefined
               }
             >
               {p.popular && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-6 py-1.5 rounded-full shadow-lg shadow-primary/30">
+                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#6BC16B] text-[#0B231A] text-xs font-bold px-6 py-1.5 rounded-full shadow-lg shadow-[#6BC16B]/20">
                   Most Popular
                 </span>
               )}
@@ -142,7 +142,7 @@ export default function PricingSection() {
                       }`}
                     >
                       <Check
-                        className={`w-3 h-3 ${p.popular ? 'text-primary-light' : 'text-primary'}`}
+                        className={`w-3 h-3 ${p.popular ? 'text-[#6BC16B]' : 'text-[#6BC16B]'}`}
                       />
                     </div>
                     <span className={p.popular ? 'text-white/90' : 'text-gray-600'}>{f}</span>
@@ -152,10 +152,10 @@ export default function PricingSection() {
 
               <Link
                 to="/dashboard"
-                className={`block text-center font-semibold py-4 rounded-xl transition-all text-sm ${
+                className={`block text-center font-bold py-4 rounded-xl transition-all text-sm ${
                   p.popular
-                    ? 'bg-primary text-white hover:bg-[#1ea34e] shadow-lg shadow-primary/30'
-                    : 'bg-primary border border-primary text-white hover:bg-primary-dark'
+                    ? 'bg-[#6BC16B] text-[#0B231A] hover:bg-[#5bb05b] shadow-lg shadow-[#6BC16B]/20'
+                    : 'bg-[#0B231A] text-white hover:bg-[#153A2D]'
                 }`}
               >
                 {p.cta} {p.popular && <ArrowRight className="w-4 h-4 inline ml-1" />}
@@ -173,7 +173,7 @@ export default function PricingSection() {
           <h3 className="text-2xl font-bold text-dark text-center mb-8">Frequently Asked Questions</h3>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
-              <div key={i} className="bg-primary-soft rounded-xl p-6 border border-gray-100">
+              <div key={i} className="bg-primary-soft rounded-xl p-6 border-2 border-gray-200 hover:border-primary/20 transition-colors">
                 <div className="flex items-start gap-3">
                   <HelpCircle className="w-5 h-5 text-primary-dark flex-shrink-0 mt-0.5" />
                   <div>

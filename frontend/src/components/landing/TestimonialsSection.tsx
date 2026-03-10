@@ -72,22 +72,23 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-24 lg:py-32 bg-primary-soft">
+    <section className="py-24 lg:py-32 bg-[#0A1A14]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           tag="Testimonials"
           title="Trusted by Industry Leaders"
           description="See how organizations across India are transforming their document workflows with DRISHTI's AI-powered intelligence."
+          dark={true}
         />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col"
+              className="bg-white/5 rounded-2xl p-7 border border-white/10 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col group"
             >
               {/* Quote icon */}
-              <Quote className="w-8 h-8 text-gray-100 mb-4" />
+              <Quote className="w-8 h-8 text-white/5 mb-4" />
               
               {/* Stars */}
               <div className="flex items-center gap-0.5 mb-4">
@@ -97,12 +98,12 @@ export default function TestimonialsSection() {
               </div>
 
               {/* Text */}
-              <p className="text-sm text-gray leading-relaxed mb-6 flex-1">"{t.text}"</p>
+              <p className="text-sm text-white leading-relaxed mb-6 flex-1">"{t.text}"</p>
 
               {/* Stat highlight */}
-              <div className="bg-primary-soft rounded-xl p-4 mb-6">
-                <p className="text-2xl font-extrabold text-black">{t.stat}</p>
-                <p className="text-xs text-gray font-medium">{t.statLabel}</p>
+              <div className="bg-white/5 rounded-xl p-4 mb-6 border border-white/5">
+                <p className="text-2xl font-extrabold text-[#6BC16B]">{t.stat}</p>
+                <p className="text-xs text-white/40 font-medium">{t.statLabel}</p>
               </div>
 
               {/* Author */}
@@ -114,9 +115,9 @@ export default function TestimonialsSection() {
                   {t.avatar}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-black">{t.name}</p>
-                  <p className="text-xs text-gray">{t.role}</p>
-                  <p className="text-[10px] text-primary-dark font-medium">{t.org}</p>
+                  <p className="text-sm font-bold text-white">{t.name}</p>
+                  <p className="text-xs text-white/40">{t.role}</p>
+                  <p className="text-[10px] text-[#6BC16B] font-bold">{t.org}</p>
                 </div>
               </div>
             </div>

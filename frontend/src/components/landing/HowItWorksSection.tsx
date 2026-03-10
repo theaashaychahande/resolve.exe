@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Upload, Cpu, ClipboardList, BarChart3, ArrowRight, Check } from 'lucide-react';
 import SectionHeader from '@/components/ui/SectionHeader';
 
@@ -38,12 +39,13 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="py-24 lg:py-32 bg-primary-soft">
+    <section id="how-it-works" className="py-24 lg:py-32 bg-[#0A1A14]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           tag="How It Works"
           title="From Document to Data in 4 Simple Steps"
           description="Our streamlined workflow takes your physical or digital documents and converts them into structured, searchable data in seconds."
+          dark={true}
         />
 
         {/* Steps */}
@@ -57,7 +59,7 @@ export default function HowItWorksSection() {
                 </div>
               )}
 
-              <div className="relative bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full">
+              <div className="relative bg-white/5 rounded-2xl p-7 shadow-sm border border-white/10 hover:border-[#6BC16B]/20 hover:shadow-2xl hover:shadow-[#6BC16B]/5 transition-all duration-300 hover:-translate-y-2 h-full">
                 {/* Step number watermark */}
                 <span className="text-6xl font-black absolute top-3 right-4 opacity-[0.04]">
                   {s.step}
@@ -73,13 +75,13 @@ export default function HowItWorksSection() {
                   Step {s.step}
                 </div>
                 
-                <h3 className="text-lg font-bold text-dark mb-2">{s.title}</h3>
-                <p className="text-sm text-gray leading-relaxed mb-5">{s.desc}</p>
+                <h3 className="text-lg font-bold text-white mb-2">{s.title}</h3>
+                <p className="text-sm text-white/50 leading-relaxed mb-5">{s.desc}</p>
                 
                 {/* Details checklist */}
                 <ul className="space-y-2">
                   {s.details.map((d) => (
-                    <li key={d} className="flex items-center gap-2 text-xs text-gray">
+                    <li key={d} className="flex items-center gap-2 text-xs text-white/40">
                       <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: s.color }} />
                       {d}
                     </li>
@@ -91,16 +93,19 @@ export default function HowItWorksSection() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center bg-white rounded-2xl border border-gray-100 shadow-sm p-8 lg:p-12 max-w-3xl mx-auto">
+        <div className="text-center bg-white/5 rounded-2xl border border-white/10 shadow-sm p-8 lg:p-12 max-w-3xl mx-auto">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm font-semibold text-primary-dark">Average processing time: under 2 seconds</span>
+            <div className="w-3 h-3 rounded-full bg-[#6BC16B] animate-pulse" />
+            <span className="text-sm font-semibold text-[#6BC16B]">Average processing time: under 10 seconds</span>
           </div>
-          <h3 className="text-xl font-bold text-dark mb-3">Ready to see it in action?</h3>
-          <p className="text-sm text-gray mb-6 max-w-md mx-auto">Upload your first document and watch DRISHTI extract structured data in real-time. No signup required for your first 5 documents.</p>
-          <a href="#/dashboard/upload" className="inline-flex items-center gap-2 bg-primary hover:bg-[#1ea34e] text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5">
-            Try It Now — Free <ArrowRight className="w-4 h-4" />
-          </a>
+          <h3 className="text-xl font-bold text-white mb-3">Ready to see it in action?</h3>
+          <p className="text-sm text-white/40 mb-6 max-w-md mx-auto">Upload your first document and watch DRISHTI extract structured data in real-time. No signup required for your first 5 documents.</p>
+          <Link 
+            to="/dashboard/upload" 
+            className="inline-flex items-center gap-2 bg-[#6BC16B] hover:bg-[#5bb05b] text-[#0B231A] font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-[#6BC16B]/10 transition-all hover:-translate-y-0.5"
+          >
+            TRY NOW! <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>

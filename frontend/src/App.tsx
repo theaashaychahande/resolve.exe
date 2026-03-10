@@ -7,7 +7,6 @@ import UploadPage from '@/pages/UploadPage';
 import DataExtractionPage from '@/pages/DataExtractionPage';
 import AnalyticsPage from '@/pages/AnalyticsPage';
 import ExportPage from '@/pages/ExportPage';
-import SettingsPage from '@/pages/SettingsPage';
 
 export default function App() {
   return (
@@ -22,7 +21,6 @@ export default function App() {
               <Route path="data" element={<DataExtractionPage />} />
               <Route path="analytics" element={<AnalyticsPage />} />
               <Route path="export" element={<ExportPage />} />
-              <Route path="settings" element={<SettingsPage />} />
             </Route>
           </Routes>
         </Router>

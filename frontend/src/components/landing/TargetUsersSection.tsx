@@ -52,13 +52,14 @@ export default function TargetUsersSection() {
           tag="Use Cases"
           title="Built for Every Industry"
           description="DRISHTI serves organizations of all sizes across multiple sectors. See how different industries benefit from AI-powered document intelligence."
+          dark={false}
         />
 
         <div className="space-y-6">
           {users.map((u, i) => (
             <div
               key={i}
-              className="group bg-white border border-gray-100 rounded-2xl p-6 lg:p-8 hover:shadow-xl hover:border-gray-200 transition-all duration-300 overflow-hidden relative"
+              className="group bg-white border-2 border-gray-200 rounded-2xl p-6 lg:p-8 hover:shadow-xl hover:border-gray-300 transition-all duration-300 overflow-hidden relative"
             >
               {/* Background accent */}
               <div className="absolute top-0 right-0 w-40 h-40 rounded-bl-full opacity-[0.03] transition-opacity group-hover:opacity-[0.06]" style={{ background: u.color }} />
@@ -70,7 +71,7 @@ export default function TargetUsersSection() {
                     <u.icon className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-dark">{u.name}</h3>
+                    <h3 className="text-lg font-bold text-gray-900">{u.name}</h3>
                     <p className="text-xs font-semibold mt-1" style={{ color: u.color }}>{u.stat}</p>
                   </div>
                 </div>
