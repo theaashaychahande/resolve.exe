@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import type { DocumentContext, UploadSession, UploadedFile, ExtractedData } from '@/types';
+import { extractDocuments } from '@/utils/api';
 
 interface UploadContextType {
   // Session management
@@ -56,9 +57,9 @@ export function UploadProvider({ children }: { children: ReactNode }) {
       setSession((prev) =>
         prev
           ? {
-              ...prev,
-              files: [...prev.files, ...newFiles],
-            }
+            ...prev,
+            files: [...prev.files, ...newFiles],
+          }
           : null
       );
     },
@@ -69,9 +70,9 @@ export function UploadProvider({ children }: { children: ReactNode }) {
     setSession((prev) =>
       prev
         ? {
-            ...prev,
-            files: prev.files.filter((f) => f.id !== fileId),
-          }
+          ...prev,
+          files: prev.files.filter((f) => f.id !== fileId),
+        }
         : null
     );
   }, []);
@@ -80,9 +81,9 @@ export function UploadProvider({ children }: { children: ReactNode }) {
     setSession((prev) =>
       prev
         ? {
-            ...prev,
-            files: [],
-          }
+          ...prev,
+          files: [],
+        }
         : null
     );
   }, []);
@@ -92,20 +93,90 @@ export function UploadProvider({ children }: { children: ReactNode }) {
       if (!prev) return null;
       return {
         ...prev,
-        files: prev.files.map((f) => (f.status === 'ready' ? { ...f, status: 'processing' as const } : f)),
+        files: prev.files.map((f) =>
+          f.status === 'ready' ? { ...f, status: 'processing' as const } : f
+        ),
       };
     });
 
-    // Simulate processing
-    setTimeout(() => {
-      setSession((prev) => {
-        if (!prev) return null;
-        return {
-          ...prev,
-          files: prev.files.map((f) => (f.status === 'processing' ? { ...f, status: 'done' as const } : f)),
-        };
-      });
-    }, 2500);
+    // We capture the session snapshot inside a state callback
+    setSession((prev) => {
+      if (!prev) return null;
+
+      const readyFiles = prev.files.filter((f) => f.status === 'processing');
+      const ctx = prev.context;
+
+      // Fire the API call asynchronously
+      (async () => {
+        try {
+          const filesToUpload = readyFiles.map((f) => f.file);
+          const context = ctx
+            ? {
+              docName: ctx.docName,
+              docType: ctx.docType,
+              languages: ctx.languages,
+              description: ctx.description || ctx.docType,
+              targetFields: ctx.targetFields,
+            }
+            : {};
+
+          const response = await extractDocuments(filesToUpload, context);
+
+          // Map results back by filename
+          const resultMap = new Map(
+            response.results.map((r) => [r.filename, r])
+          );
+
+          setSession((s) => {
+            if (!s) return null;
+            return {
+              ...s,
+              files: s.files.map((f) => {
+                if (f.status !== 'processing') return f;
+                const result = resultMap.get(f.file.name);
+                if (!result) return { ...f, status: 'done' as const };
+                if (result.error) {
+                  return {
+                    ...f,
+                    status: 'failed' as const,
+                    errorMessage: result.error,
+                  };
+                }
+                const extracted: ExtractedData = {
+                  docName: ctx?.docName || f.file.name,
+                  name: String(result.fields?.['Name'] ?? result.fields?.['name'] ?? ''),
+                  date: String(result.fields?.['Date'] ?? result.fields?.['date'] ?? ''),
+                  idNumber: String(result.fields?.['ID Number'] ?? result.fields?.['id_number'] ?? ''),
+                  fields: Object.fromEntries(
+                    Object.entries(result.fields ?? {}).map(([k, v]) => [k, String(v ?? '')])
+                  ),
+                };
+                return {
+                  ...f,
+                  status: 'done' as const,
+                  extractedData: extracted,
+                };
+              }),
+            };
+          });
+        } catch (err) {
+          const message = err instanceof Error ? err.message : 'Unknown error';
+          setSession((s) => {
+            if (!s) return null;
+            return {
+              ...s,
+              files: s.files.map((f) =>
+                f.status === 'processing'
+                  ? { ...f, status: 'failed' as const, errorMessage: message }
+                  : f
+              ),
+            };
+          });
+        }
+      })();
+
+      return prev; // Return unchanged — the async call will update state
+    });
   }, []);
 
   const updateFileStatus = useCallback(
@@ -113,13 +184,13 @@ export function UploadProvider({ children }: { children: ReactNode }) {
       setSession((prev) =>
         prev
           ? {
-              ...prev,
-              files: prev.files.map((f) =>
-                f.id === fileId
-                  ? { ...f, status, errorMessage: errorMessage || undefined }
-                  : f
-              ),
-            }
+            ...prev,
+            files: prev.files.map((f) =>
+              f.id === fileId
+                ? { ...f, status, errorMessage: errorMessage || undefined }
+                : f
+            ),
+          }
           : null
       );
     },
@@ -130,13 +201,13 @@ export function UploadProvider({ children }: { children: ReactNode }) {
     setSession((prev) =>
       prev
         ? {
-            ...prev,
-            files: prev.files.map((f) =>
-              f.id === fileId
-                ? { ...f, extractedData: data, status: 'done' as const }
-                : f
-            ),
-          }
+          ...prev,
+          files: prev.files.map((f) =>
+            f.id === fileId
+              ? { ...f, extractedData: data, status: 'done' as const }
+              : f
+          ),
+        }
         : null
     );
   }, []);
