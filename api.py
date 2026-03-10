@@ -224,9 +224,6 @@ async def extract(
             all_rows.append(row)
 
     if all_rows:
-        # User specified "after 15 sec" delay
-        await asyncio.sleep(15)
-        
         df = pd.DataFrame(all_rows)
         output_dir = "output"
         if not os.path.exists(output_dir):

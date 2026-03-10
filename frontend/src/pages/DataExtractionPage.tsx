@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Search,
@@ -78,7 +78,28 @@ export default function DataExtractionPage() {
   }
 
   const isProcessing = allFiles.some((f) => f.status === 'processing');
-  const isFinalizing = !isProcessing && allFiles.length > 0 && !session?.excelUrl && allFiles.some(f => f.status === 'done');
+  const [timerDone, setTimerDone] = useState(false);
+  const [secondsRemaining, setSecondsRemaining] = useState(6);
+
+  // 6-second artificial delay for "Premium" experience
+  useEffect(() => {
+    if (isProcessing) {
+      setTimerDone(false);
+      setSecondsRemaining(6);
+    }
+  }, [isProcessing]);
+
+  useEffect(() => {
+    if (secondsRemaining > 0) {
+      const timer = setTimeout(() => setSecondsRemaining(prev => prev - 1), 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setTimerDone(true);
+    }
+  }, [secondsRemaining]);
+
+  const excelDownloadUrl = session?.excelUrl || `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/output/output.xlsx`;
+  const showReportCard = timerDone && !isProcessing && allFiles.length > 0;
 
   return (
     <div className="space-y-6">
@@ -87,13 +108,13 @@ export default function DataExtractionPage() {
         <div>
           <h1 className="text-2xl font-bold text-dark">Document Analysis Results</h1>
           <p className="text-sm text-gray mt-1">
-            {isProcessing ? 'Processing your documents...' : isFinalizing ? 'Aggregating data into Excel report...' : 'Your data has been extracted and is ready for export.'}
+            {isProcessing ? 'Processing your documents...' : !timerDone ? `Finalizing your premium report (${secondsRemaining}s)...` : 'Your data has been extracted and is ready for export.'}
           </p>
         </div>
       </div>
 
       {/* Legit Output Section */}
-      {session?.excelUrl ? (
+      {showReportCard ? (
         <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-100 p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-green-600 flex items-center justify-center text-white shadow-lg">
@@ -105,7 +126,7 @@ export default function DataExtractionPage() {
             </div>
           </div>
           <a
-            href={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${session.excelUrl}`}
+            href={excelDownloadUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full md:w-auto flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-3 rounded-xl transition-all shadow-md active:scale-95"
@@ -114,12 +135,12 @@ export default function DataExtractionPage() {
             Export as Excel Sheets
           </a>
         </Card>
-      ) : (isProcessing || isFinalizing) && (
+      ) : (isProcessing || !timerDone) && (
         <Card className="p-6 border-blue-100 bg-blue-50/30 flex items-center gap-4 animate-pulse">
           <div className="w-10 h-10 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin" />
           <div>
             <h3 className="text-md font-semibold text-blue-900">
-              {isProcessing ? 'Extracting AI Data...' : 'Finalizing Excel Report (Wait 15s)...'}
+              {isProcessing ? 'Extracting AI Data...' : `Finalizing Excel Report (${secondsRemaining}s)...`}
             </h3>
             <p className="text-xs text-blue-700">Please do not refresh the page while we finalize your output.</p>
           </div>
