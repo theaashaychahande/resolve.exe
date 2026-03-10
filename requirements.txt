@@ -1,0 +1,24 @@
+# Core Image & PDF Processing
+opencv-python
+easyocr
+pdf2image
+pillow
+
+# Data & AI
+pandas
+openpyxl
+google-generativeai
+python-dotenv
+
+# Data & AI
+pandas
+openpyxl
+google-generativeai
+python-dotenv
+
+# Dashboard & Visualization
+streamlit
+matplotlib
+seaborn
+plotly
+requests
