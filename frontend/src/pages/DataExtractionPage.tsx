@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Search,
   Eye,
   Pencil,
   Download,
-  Filter,
   ChevronLeft,
   ChevronRight,
   FileText,
   Upload,
+  CheckCircle2,
 } from 'lucide-react';
 import Card from '@/components/ui/Card';
 import Modal from '@/components/ui/Modal';
@@ -20,7 +20,6 @@ import type { UploadedFile } from '@/types';
 export default function DataExtractionPage() {
   const { session } = useUpload();
   const [search, setSearch] = useState('');
-  const [filterStatus, setFilterStatus] = useState('All');
   const [viewModal, setViewModal] = useState<UploadedFile | null>(null);
 
   // Use session files or empty array
@@ -42,8 +41,7 @@ export default function DataExtractionPage() {
       d.docName.toLowerCase().includes(search.toLowerCase()) ||
       d.name.toLowerCase().includes(search.toLowerCase()) ||
       d.idNumber.toLowerCase().includes(search.toLowerCase());
-    const matchStatus = filterStatus === 'All' || d.status === filterStatus;
-    return matchSearch && matchStatus;
+    return matchSearch;
   });
 
   // Empty state
@@ -77,75 +75,40 @@ export default function DataExtractionPage() {
     );
   }
 
-  const isProcessing = allFiles.some((f) => f.status === 'processing');
-  const [secondsRemaining, setSecondsRemaining] = useState(6);
-  const [countdownStarted, setCountdownStarted] = useState(false);
-
-  // Start countdown immediately on mount if we have files
-  useEffect(() => {
-    if (allFiles.length > 0 && !countdownStarted) {
-      setCountdownStarted(true);
-    }
-  }, [allFiles.length, countdownStarted]);
-
-  useEffect(() => {
-    if (countdownStarted && secondsRemaining > 0) {
-      const timer = setTimeout(() => setSecondsRemaining(prev => prev - 1), 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [countdownStarted, secondsRemaining]);
-
-  const timerDone = secondsRemaining === 0;
   const excelDownloadUrl = session?.excelUrl || `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/output/output.xlsx`;
-  const showReportCard = timerDone && allFiles.length > 0;
 
   return (
     <div className="space-y-6">
       {/* Page header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-dark">Document Analysis Results</h1>
+          <h1 className="text-2xl font-bold text-dark">Analysis Results</h1>
           <p className="text-sm text-gray mt-1">
-            {showReportCard
-              ? 'Your data has been extracted and is ready for export.'
-              : `Processing documents and finalizing report (${secondsRemaining}s)...`}
+            Review your extracted data and export the final report.
           </p>
         </div>
       </div>
 
-      {/* Legit Output Section */}
-      {showReportCard ? (
-        <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-100 p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-green-600 flex items-center justify-center text-white shadow-lg">
-              <Download className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-green-900">Reports Generated Successfully</h3>
-              <p className="text-sm text-green-700">Combined data from {allFiles.length} documents is ready in Excel format.</p>
-            </div>
+      <Card className="bg-gradient-to-r from-[#2D5444] to-[#4ade80] border-green-100 p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm text-white">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shadow-lg">
+            <Download className="w-6 h-6" />
           </div>
-          <a
-            href={excelDownloadUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full md:w-auto flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-3 rounded-xl transition-all shadow-md active:scale-95"
-          >
-            <Download className="w-5 h-5" />
-            Export as Excel Sheets
-          </a>
-        </Card>
-      ) : allFiles.length > 0 && (
-        <Card className="p-6 border-blue-100 bg-blue-50/30 flex items-center gap-4 animate-pulse">
-          <div className="w-10 h-10 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin" />
           <div>
-            <h3 className="text-md font-semibold text-blue-900">
-              {isProcessing ? `Analyzing Documents (${secondsRemaining}s)...` : `Finalizing Excel Report (${secondsRemaining}s)...`}
-            </h3>
-            <p className="text-xs text-blue-700">Please do not refresh the page. Your premium report is almost ready.</p>
+            <h3 className="text-lg font-bold">Reports Ready</h3>
+            <p className="text-sm opacity-90">Combined data from {allFiles.length} documents is available in Excel format.</p>
           </div>
-        </Card>
-      )}
+        </div>
+        <a
+          href={excelDownloadUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full md:w-auto flex items-center justify-center gap-3 bg-white text-[#2D5444] font-bold px-8 py-3 rounded-xl transition-all shadow-md active:scale-95 hover:bg-white/90"
+        >
+          <Download className="w-5 h-5" />
+          Download Excel Output
+        </a>
+      </Card>
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
@@ -160,19 +123,9 @@ export default function DataExtractionPage() {
           />
         </div>
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-primary-dark" />
-          {['All', 'Completed', 'Processing'].map((s) => (
-            <button
-              key={s}
-              onClick={() => setFilterStatus(s)}
-              className={`text-xs font-medium px-3 py-1.5 rounded-lg transition ${filterStatus === s
-                ? 'bg-primary-dark text-white'
-                : 'bg-white border border-border text-gray hover:border-primary-dark/30'
-                }`}
-            >
-              {s}
-            </button>
-          ))}
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 text-[#2D5444] border border-green-100 rounded-lg text-xs font-bold">
+            <CheckCircle2 className="w-3.5 h-3.5" /> Verified Dataset
+          </div>
         </div>
       </div>
 
@@ -218,9 +171,9 @@ export default function DataExtractionPage() {
                     {row.idNumber}
                   </td>
                   <td className="py-3 px-4">
-                    <StatusBadge
-                      status={row.status === 'Processing' ? 'Processing' : 'Completed'}
-                    />
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 text-green-700">
+                      Completed
+                    </span>
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-1">
@@ -242,8 +195,7 @@ export default function DataExtractionPage() {
                         onClick={() => {
                           window.open(excelDownloadUrl, '_blank');
                         }}
-                        disabled={!timerDone}
-                        className="p-1.5 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-amber-50 text-gray hover:text-amber-600 transition"
+                        className="p-1.5 rounded-lg hover:bg-amber-50 text-gray hover:text-amber-600 transition"
                         title="Download Global Excel Report"
                       >
                         <Download className="w-4 h-4" />

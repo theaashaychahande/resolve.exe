@@ -5,7 +5,6 @@ import {
   FileText,
   X,
   CheckCircle2,
-  Loader2,
   CloudUpload,
 } from 'lucide-react';
 import DocumentContextForm from '@/components/DocumentContextForm';
@@ -20,7 +19,6 @@ export default function UploadPage() {
     addFiles,
     removeFile,
     clearFiles,
-    processFiles,
     showSuccessNotification,
     setShowSuccessNotification
   } = useUpload();
