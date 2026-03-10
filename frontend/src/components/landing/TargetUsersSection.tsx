@@ -75,12 +75,11 @@ export default function TargetUsersSection() {
                   </div>
                 </div>
 
-                {/* Description */}
                 <div className="flex-1">
-                  <p className="text-sm text-gray leading-relaxed mb-4">{u.desc}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4">{u.desc}</p>
                   <div className="flex flex-wrap gap-2">
                     {u.docs.map((d) => (
-                      <span key={d} className="text-[10px] font-medium bg-primary-soft text-dark px-3 py-1.5 rounded-full border border-gray-100">
+                      <span key={d} className="text-[10px] font-medium bg-primary-soft text-gray-900 px-3 py-1.5 rounded-full border border-gray-100">
                         {d}
                       </span>
                     ))}

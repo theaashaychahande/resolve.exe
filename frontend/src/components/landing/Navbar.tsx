@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Menu, X, ArrowRight } from 'lucide-react';
+import { FileText, Menu, X } from 'lucide-react';
 
 const navLinks = [
   { href: '#features', label: 'Features' },
@@ -36,28 +36,25 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-      ? 'bg-primary-deep/95 backdrop-blur-lg border-b border-white/10 shadow-lg py-1'
-      : 'bg-primary-deep/80 backdrop-blur-md border-b border-white/5 py-2'
-      }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0A231A] shadow-lg py-1.5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
-              <FileText className="w-4.5 h-4.5 text-white" />
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-[#2D5444] flex items-center justify-center shadow-lg shadow-[#2D5444]/10">
+              <FileText className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-white tracking-tight">DRISHTI</span>
           </div>
 
-          {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop nav links - Centered */}
+          <div className="hidden md:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-sm text-white/60 hover:text-white dark:text-gray-300 dark:hover:text-white transition cursor-pointer"
+                className="text-[15px] font-medium text-white hover:text-white transition cursor-pointer"
               >
                 {link.label}
               </a>
@@ -65,24 +62,24 @@ export default function Navbar() {
           </div>
 
           {/* Desktop auth buttons */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-10">
             <Link
               to="/dashboard"
-              className="text-sm font-medium text-white/70 hover:text-white dark:text-gray-300 dark:hover:text-white transition px-4 py-2"
+              className="text-[15px] font-medium text-white hover:text-white/80 transition"
             >
               Sign In
             </Link>
             <Link
-              to="/dashboard"
-              className="inline-flex items-center gap-2.5 bg-primary hover:bg-primary-dark text-white font-bold px-5 py-2.5 rounded-lg shadow-lg shadow-primary/25 transition-all text-sm"
+              to="/dashboard/upload"
+              className="inline-flex items-center bg-[#2D5444] hover:bg-[#1b3a2f] text-white font-bold px-8 py-2.5 rounded-xl shadow-lg shadow-[#2D5444]/10 transition-all text-[15px]"
             >
-              Try It Now — Free <ArrowRight className="w-4 h-4 group-hover:translate-x-1" />
+              Start Free
             </Link>
           </div>
 
           {/* Mobile menu toggle */}
           <button
-            className="md:hidden text-white/70 dark:text-gray-300"
+            className="md:hidden text-white/70"
             onClick={() => setMobileMenu(!mobileMenu)}
           >
             {mobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -92,20 +89,20 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileMenu && (
-        <div className="md:hidden bg-primary-deep dark:bg-gray-900 border-t border-white/10 dark:border-gray-700/50 px-4 py-4 space-y-3">
+        <div className="md:hidden bg-primary-deep border-t border-white/10 px-4 py-4 space-y-3">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="block text-sm text-white/60 hover:text-white dark:text-gray-300 dark:hover:text-white cursor-pointer"
+              className="block text-sm text-white/60 hover:text-white cursor-pointer"
             >
               {link.label}
             </a>
           ))}
           <Link
-            to="/dashboard"
-            className="block w-full text-center text-sm font-medium text-white bg-primary px-5 py-2.5 rounded-lg"
+            to="/dashboard/upload"
+            className="block w-full text-center text-sm font-medium text-white bg-[#2D5444] px-5 py-2.5 rounded-lg"
           >
             Start Free
           </Link>

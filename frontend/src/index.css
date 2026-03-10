@@ -1,27 +1,13 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: 'Inter', sans-serif;
-
-  /* Primary Palette (Green) */
-  --color-primary-deep: #0F3D2E;
-  --color-primary-darker: #166534;
-  --color-primary-dark: #15803d;
-  --color-primary: #22C55E;
-  --color-primary-soft: #F0FDF4;
-  --color-primary-light: #4ADE80;
-
-  /* Neutrals */
-  --color-bg-dark: #0F172A;
-  --color-gray: #64748B;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Inter', sans-serif;
+  color: #000000;
+  background: #ffffff;
 }
 
 @keyframes fade-in-up {

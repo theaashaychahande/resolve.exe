@@ -35,7 +35,7 @@ export default function AnalyticsPage() {
     <div className="space-y-6">
       {/* Page header */}
       <div>
-        <h1 className="text-2xl font-bold text-dark">Analytics</h1>
+        <h1 className="text-2xl font-bold text-black">Analytics</h1>
         <p className="text-sm text-gray mt-1">
           Insights and statistics about your document processing.
         </p>
@@ -46,7 +46,7 @@ export default function AnalyticsPage() {
         {summaryCards.map((c) => (
           <Card key={c.label} className="p-5">
             <p className="text-sm text-gray mb-1">{c.label}</p>
-            <p className="text-2xl font-bold text-dark">{c.value}</p>
+            <p className="text-2xl font-bold text-black">{c.value}</p>
             <p className="text-xs text-primary-dark font-medium mt-1">{c.sub}</p>
           </Card>
         ))}

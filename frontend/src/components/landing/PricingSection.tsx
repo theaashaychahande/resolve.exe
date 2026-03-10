@@ -100,7 +100,7 @@ export default function PricingSection() {
               key={i}
               className={`relative rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2 flex flex-col ${
                 p.popular
-                  ? 'text-white shadow-2xl shadow-primary-deep/30 scale-[1.04] z-10'
+                  ? 'text-white shadow-2xl shadow-primary/20 scale-[1.04] z-10'
                   : 'bg-white border border-gray-100 shadow-sm hover:shadow-xl'
               }`}
               style={
@@ -118,7 +118,7 @@ export default function PricingSection() {
               <h3 className={`text-xl font-bold mb-1 ${p.popular ? 'text-white' : 'text-dark'}`}>
                 {p.name}
               </h3>
-              <p className={`text-sm mb-6 ${p.popular ? 'text-white/50' : 'text-gray'}`}>
+              <p className={`text-sm mb-6 ${p.popular ? 'text-white/70' : 'text-gray-600'}`}>
                 {p.desc}
               </p>
 
@@ -128,7 +128,7 @@ export default function PricingSection() {
                 >
                   {p.price}
                 </span>
-                <span className={`text-sm ${p.popular ? 'text-white/50' : 'text-gray'}`}>
+                <span className={`text-sm ${p.popular ? 'text-white/70' : 'text-gray-500'}`}>
                   {p.period}
                 </span>
               </div>
@@ -145,7 +145,7 @@ export default function PricingSection() {
                         className={`w-3 h-3 ${p.popular ? 'text-primary-light' : 'text-primary'}`}
                       />
                     </div>
-                    <span className={p.popular ? 'text-white/80' : 'text-gray'}>{f}</span>
+                    <span className={p.popular ? 'text-white/90' : 'text-gray-600'}>{f}</span>
                   </li>
                 ))}
               </ul>
@@ -155,7 +155,7 @@ export default function PricingSection() {
                 className={`block text-center font-semibold py-4 rounded-xl transition-all text-sm ${
                   p.popular
                     ? 'bg-primary text-white hover:bg-[#1ea34e] shadow-lg shadow-primary/30'
-                    : 'bg-primary-deep text-white hover:bg-primary-dark'
+                    : 'bg-primary border border-primary text-white hover:bg-primary-dark'
                 }`}
               >
                 {p.cta} {p.popular && <ArrowRight className="w-4 h-4 inline ml-1" />}
@@ -177,8 +177,8 @@ export default function PricingSection() {
                 <div className="flex items-start gap-3">
                   <HelpCircle className="w-5 h-5 text-primary-dark flex-shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-dark mb-2">{faq.q}</h4>
-                    <p className="text-sm text-gray leading-relaxed">{faq.a}</p>
+                    <h4 className="font-bold text-gray-900 mb-2">{faq.q}</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">{faq.a}</p>
                   </div>
                 </div>
               </div>

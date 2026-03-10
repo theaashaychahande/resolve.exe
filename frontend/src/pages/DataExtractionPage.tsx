@@ -90,7 +90,7 @@ export default function DataExtractionPage() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-primary-dark" />
           <input
             type="text"
             value={search}
@@ -100,7 +100,7 @@ export default function DataExtractionPage() {
           />
         </div>
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-gray" />
+          <Filter className="w-4 h-4 text-primary-dark" />
           {['All', 'Completed', 'Processing', 'Failed'].map((s) => (
             <button
               key={s}

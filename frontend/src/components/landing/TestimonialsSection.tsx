@@ -101,7 +101,7 @@ export default function TestimonialsSection() {
 
               {/* Stat highlight */}
               <div className="bg-primary-soft rounded-xl p-4 mb-6">
-                <p className="text-2xl font-extrabold text-dark">{t.stat}</p>
+                <p className="text-2xl font-extrabold text-black">{t.stat}</p>
                 <p className="text-xs text-gray font-medium">{t.statLabel}</p>
               </div>
 
@@ -114,7 +114,7 @@ export default function TestimonialsSection() {
                   {t.avatar}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-dark">{t.name}</p>
+                  <p className="text-sm font-semibold text-black">{t.name}</p>
                   <p className="text-xs text-gray">{t.role}</p>
                   <p className="text-[10px] text-primary-dark font-medium">{t.org}</p>
                 </div>

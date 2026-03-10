@@ -15,11 +15,11 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
       <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-primary-soft flex items-center justify-center text-gray hover:text-dark transition"
+          className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-primary-soft flex items-center justify-center text-primary-dark hover:text-black transition"
         >
           <X className="w-4 h-4" />
         </button>
-        <h3 className="text-lg font-bold text-dark mb-4">{title}</h3>
+        <h3 className="text-lg font-bold text-black mb-4">{title}</h3>
         {children}
       </div>
     </div>

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Outlet, NavLink, Link } from 'react-router-dom';
 import {
-  LayoutDashboard,
   Upload,
   Database,
   BarChart3,
@@ -18,7 +17,6 @@ import {
 import type { NavItem } from '@/types';
 
 const navItems: NavItem[] = [
-  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard', end: true },
   { to: '/dashboard/upload', icon: Upload, label: 'Upload Document' },
   { to: '/dashboard/data', icon: Database, label: 'Extracted Data' },
   { to: '/dashboard/analytics', icon: BarChart3, label: 'Analytics' },
@@ -31,7 +29,7 @@ export default function DashboardLayout() {
   const [profileOpen, setProfileOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-primary-soft">
+    <div className="flex h-screen bg-gray-50">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -45,11 +43,11 @@ export default function DashboardLayout() {
         className={`fixed inset-y-0 left-0 z-40 w-64 text-white transform transition-transform duration-300 lg:translate-x-0 lg:static lg:z-auto ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
-        style={{ background: 'linear-gradient(180deg, #0F3D2E 0%, #0E5F4B 100%)' }}
+        style={{ background: 'linear-gradient(180deg, #0B231A 0%, #2D5444 100%)' }}
       >
         {/* Logo */}
         <div className="flex items-center gap-3 px-6 py-5 border-b border-white/10">
-          <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+          <div className="w-9 h-9 rounded-lg bg-[#2D5444] flex items-center justify-center shadow-lg shadow-[#2D5444]/20">
             <FileText className="w-5 h-5 text-white" />
           </div>
           <Link to="/" className="text-xl font-bold tracking-wide">
@@ -74,7 +72,7 @@ export default function DashboardLayout() {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-primary text-white shadow-lg shadow-primary/30'
+                    ? 'bg-[#2D5444] text-white shadow-lg shadow-[#2D5444]/30'
                     : 'text-white/60 hover:bg-white/10 hover:text-white'
                 }`
               }
@@ -102,9 +100,9 @@ export default function DashboardLayout() {
       {/* ─── Main content ────────────────────────────────── */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top bar */}
-        <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-3 flex items-center gap-4">
+        <header className="bg-white border-b border-gray-100 px-4 sm:px-6 py-3 flex items-center gap-4">
           <button
-            className="lg:hidden text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            className="lg:hidden text-gray-500 hover:text-gray-700"
             onClick={() => setSidebarOpen(true)}
           >
             <Menu className="w-6 h-6" />
@@ -112,11 +110,11 @@ export default function DashboardLayout() {
 
           <div className="flex-1 flex items-center">
             <div className="relative max-w-md w-full hidden sm:block">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search documents..."
-                className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition text-gray-900 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400"
+                className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-100 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition text-gray-900 placeholder-gray-400"
               />
             </div>
           </div>
@@ -133,10 +131,10 @@ export default function DashboardLayout() {
               onClick={() => setProfileOpen(!profileOpen)}
               className="flex items-center gap-2 text-sm hover:bg-primary-soft rounded-lg px-2 py-1.5 transition"
             >
-              <div className="w-8 h-8 rounded-full bg-primary-deep/10 flex items-center justify-center text-primary-dark font-semibold text-xs">
+              <div className="w-8 h-8 rounded-full bg-[#2D5444]/10 flex items-center justify-center text-[#2D5444] font-bold text-xs shadow-sm">
                 AK
               </div>
-              <span className="hidden sm:block text-dark font-medium">Admin</span>
+              <span className="hidden sm:block text-gray-900 font-bold">Admin</span>
               <ChevronDown className="w-4 h-4 text-gray-400" />
             </button>
 
@@ -162,7 +160,7 @@ export default function DashboardLayout() {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-gray-900">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-gray-50">
           <Outlet />
         </main>
       </div>

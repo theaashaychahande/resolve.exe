@@ -162,7 +162,7 @@ export default function ExportPage() {
           {/* Date range */}
           <Card className="p-6">
             <h3 className="text-sm font-semibold text-dark mb-4 flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-gray" /> Date Range
+              <Calendar className="w-4 h-4 text-primary-dark" /> Date Range
             </h3>
             <div className="flex flex-wrap gap-2">
               {[

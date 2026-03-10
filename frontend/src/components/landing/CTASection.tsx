@@ -25,7 +25,7 @@ export default function CTASection() {
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/[0.03] rounded-full translate-y-1/2 -translate-x-1/2" />
 
           <div className="relative text-center">
-            <div className="inline-flex items-center gap-2 bg-white/10 text-primary-light text-xs font-semibold px-5 py-2.5 rounded-full mb-8 border border-white/10">
+            <div className="inline-flex items-center gap-2 bg-primary/5 text-primary-dark text-xs font-bold px-5 py-2.5 rounded-full mb-8 border border-primary/10">
               <Clock className="w-3.5 h-3.5" /> Get started in under 2 minutes
             </div>
 

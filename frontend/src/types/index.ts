@@ -49,10 +49,10 @@ export interface StatItem {
 /** Document context form data */
 export interface DocumentContext {
   docName: string;
-  docType: 'Passport' | 'Invoice' | 'Marksheet' | 'Custom';
+  docType: string;
   languages: string[];
   writingStyle: 'Printed' | 'Handwritten' | 'Mixed';
-  description: string;
+  description?: string;
   targetFields: string[];
 }
 

@@ -4,11 +4,11 @@ import type { DocumentContext, UploadSession, UploadedFile, ExtractedData } from
 interface UploadContextType {
   // Session management
   session: UploadSession | null;
-  createSession: (context: DocumentContext) => void;
+  createSession: (context?: DocumentContext) => void;
   clearSession: () => void;
 
   // File management
-  addFiles: (files: File[], fileInputId?: string) => void;
+  addFiles: (files: File[]) => void;
   removeFile: (fileId: string) => void;
   clearFiles: () => void;
 
@@ -28,10 +28,10 @@ const UploadContext = createContext<UploadContextType | undefined>(undefined);
 export function UploadProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<UploadSession | null>(null);
 
-  const createSession = useCallback((context: DocumentContext) => {
+  const createSession = useCallback((context?: DocumentContext) => {
     const newSession: UploadSession = {
       id: `session_${Date.now()}`,
-      context,
+      context: context || null,
       files: [],
       createdAt: new Date(),
     };
@@ -43,7 +43,7 @@ export function UploadProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const addFiles = useCallback(
-    (files: File[], fileInputId?: string) => {
+    (files: File[]) => {
       if (!session) return;
 
       const newFiles = Array.from(files).map((file) => ({

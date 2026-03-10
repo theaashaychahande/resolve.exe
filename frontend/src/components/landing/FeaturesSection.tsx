@@ -27,35 +27,35 @@ const features = [
     icon: Globe,
     title: 'Multi Language Support',
     desc: 'Process documents in English, Hindi, and Marathi with equal accuracy. Our multilingual AI models understand regional document formats and language-specific nuances.',
-    gradient: 'from-blue-600 to-blue-500',
+    gradient: 'from-primary-darker to-primary',
     highlights: ['English, Hindi, Marathi', 'Regional Formats', 'Script Detection'],
   },
   {
     icon: ClipboardList,
     title: 'Structured Data Output',
     desc: 'Convert unstructured documents into clean, validated JSON data ready for your databases, APIs, or downstream systems. Custom field mapping and schema support included.',
-    gradient: 'from-amber-600 to-amber-500',
+    gradient: 'from-primary to-primary-light',
     highlights: ['JSON & CSV Output', 'Custom Schemas', 'API Ready'],
   },
   {
     icon: LayoutDashboard,
     title: 'Smart Dashboard',
     desc: 'Powerful analytics dashboard to search, filter, and analyze extracted data. Visual charts, real-time processing stats, and customizable views for your team.',
-    gradient: 'from-purple-600 to-purple-500',
+    gradient: 'from-primary-deep to-primary',
     highlights: ['Real-time Analytics', 'Custom Filters', 'Team Views'],
   },
   {
     icon: ShieldCheck,
     title: 'Enterprise Security',
     desc: 'Bank-grade AES-256 encryption for data at rest and in transit. Role-based access control, audit logs, and compliance with GDPR and Indian data protection standards.',
-    gradient: 'from-rose-600 to-rose-500',
+    gradient: 'from-primary-darker to-primary-dark',
     highlights: ['AES-256 Encryption', 'RBAC', 'Audit Trails'],
   },
   {
     icon: Zap,
     title: 'Lightning Fast Processing',
     desc: 'Process documents in under 2 seconds with our optimized AI pipeline. Batch upload hundreds of documents and get results in minutes, not hours.',
-    gradient: 'from-cyan-600 to-cyan-500',
+    gradient: 'from-primary to-primary-soft',
     highlights: ['<2s Processing', 'Batch Upload', 'Queue Management'],
   },
 ];
@@ -71,7 +71,7 @@ const showcaseFeatures = [
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="py-24 lg:py-32 bg-gray-50 dark:bg-gray-800">
+    <section id="features" className="py-24 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           tag="Features"
@@ -84,7 +84,7 @@ export default function FeaturesSection() {
           {features.map((f, i) => (
             <div
               key={i}
-              className="group bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-2xl hover:shadow-gray-200/60 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+              className="group bg-primary-soft border border-gray-100 rounded-2xl p-8 hover:shadow-2xl hover:shadow-gray-200/60 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
             >
               {/* Background decoration on hover */}
               <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${f.gradient} opacity-0 group-hover:opacity-[0.04] rounded-bl-full transition-opacity duration-500`} />
@@ -94,8 +94,8 @@ export default function FeaturesSection() {
               >
                 <f.icon className="w-7 h-7 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-dark mb-3">{f.title}</h3>
-              <p className="text-sm text-gray leading-relaxed mb-5">{f.desc}</p>
+              <h3 className="text-xl font-bold text-black mb-3">{f.title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-5">{f.desc}</p>
 
               {/* Feature highlights */}
               <div className="flex flex-wrap gap-2 mb-5">
@@ -117,25 +117,25 @@ export default function FeaturesSection() {
         </div>
 
         {/* Product showcase grid */}
-        <div className="relative bg-bg-dark rounded-3xl p-8 sm:p-12 border border-white/10 shadow-2xl overflow-hidden group/container">
+        <div className="relative bg-white rounded-3xl p-8 sm:p-12 border border-gray-200 shadow-2xl overflow-hidden group/container">
           {/* Subtle background decoration */}
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl transition-transform duration-700 group-hover/container:scale-110" />
 
           <div className="relative">
             <div className="text-center mb-12">
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">And so much more...</h3>
-              <p className="text-white/50 max-w-lg mx-auto">Every tool your team needs for complete document intelligence, from intake to insight.</p>
+              <h3 className="text-2xl sm:text-3xl font-bold text-black mb-3">And so much more...</h3>
+              <p className="text-gray-600 max-w-lg mx-auto">Every tool your team needs for complete document intelligence, from intake to insight.</p>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {showcaseFeatures.map((f, i) => (
-                <div key={i} className="flex items-start gap-4 bg-white/5 border border-white/5 hover:border-primary/30 hover:bg-white/10 rounded-xl p-5 transition-all duration-300 group/item hover:-translate-y-1">
-                  <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 shadow-sm group-hover/item:scale-110 border border-primary/20">
-                    <f.icon className="w-5 h-5 text-primary" />
+                <div key={i} className="flex items-start gap-4 bg-primary-soft border border-primary-light hover:border-primary hover:bg-primary-light rounded-xl p-5 transition-all duration-300 group/item hover:-translate-y-1">
+                  <div className="w-11 h-11 rounded-lg bg-primary-soft flex items-center justify-center flex-shrink-0 shadow-sm group-hover/item:scale-110 border border-primary">
+                    <f.icon className="w-5 h-5 text-primary-dark" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white mb-1 text-sm">{f.label}</h4>
-                    <p className="text-xs text-white/40 leading-relaxed">{f.desc}</p>
+                    <h4 className="font-semibold text-black mb-1 text-sm">{f.label}</h4>
+                    <p className="text-xs text-gray-500 leading-relaxed">{f.desc}</p>
                   </div>
                 </div>
               ))}

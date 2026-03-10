@@ -24,8 +24,8 @@ const stats = [
     change: '+12.5%',
     up: true,
     icon: FileText,
-    color: '#1F7A63',
-    bg: '#1F7A6310',
+    color: '#2D5444',
+    bg: '#fcfcfc',
     desc: 'All time processed',
   },
   {
@@ -35,7 +35,7 @@ const stats = [
     up: true,
     icon: TrendingUp,
     color: '#3B82F6',
-    bg: '#3B82F610',
+    bg: '#fcfcfc',
     desc: 'Since midnight',
   },
   {
@@ -45,7 +45,7 @@ const stats = [
     up: true,
     icon: Target,
     color: '#F59E0B',
-    bg: '#F59E0B10',
+    bg: '#fcfcfc',
     desc: '30-day average',
   },
   {
@@ -55,23 +55,23 @@ const stats = [
     up: false,
     icon: Users,
     color: '#8B5CF6',
-    bg: '#8B5CF610',
+    bg: '#fcfcfc',
     desc: 'This month',
   },
 ];
 
 const pieData = [
-  { name: 'Aadhaar', value: 35, color: '#1F7A63' },
-  { name: 'PAN Card', value: 25, color: '#22C55E' },
+  { name: 'Aadhaar', value: 35, color: '#2D5444' },
+  { name: 'PAN Card', value: 25, color: '#1B3A2F' },
   { name: 'Invoice', value: 20, color: '#3B82F6' },
   { name: 'Certificate', value: 15, color: '#F59E0B' },
   { name: 'Other', value: 5, color: '#8B5CF6' },
 ];
 
 const recentActivity = [
-  { action: 'Uploaded 5 invoices', user: 'Rahul S.', time: '2 min ago', icon: Upload, color: '#1F7A63' },
+  { action: 'Uploaded 5 invoices', user: 'Rahul S.', time: '2 min ago', icon: Upload, color: '#2D5444' },
   { action: 'Exported CSV report', user: 'Priya D.', time: '15 min ago', icon: BarChart3, color: '#3B82F6' },
-  { action: 'Processed PAN card batch', user: 'Amit K.', time: '1 hr ago', icon: CheckCircle2, color: '#22C55E' },
+  { action: 'Processed PAN card batch', user: 'Amit K.', time: '1 hr ago', icon: CheckCircle2, color: '#2D5444' },
   { action: 'Failed extraction — retrying', user: 'System', time: '2 hr ago', icon: AlertCircle, color: '#EF4444' },
   { action: 'New user joined team', user: 'Admin', time: '3 hr ago', icon: Users, color: '#8B5CF6' },
 ];
@@ -138,15 +138,15 @@ export default function DashboardPage() {
             <AreaChart data={dashboardAreaData}>
               <defs>
                 <linearGradient id="colorDocs" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#1F7A63" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#1F7A63" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#2D5444" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#2D5444" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
               <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#6B7280' }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fontSize: 12, fill: '#6B7280' }} axisLine={false} tickLine={false} />
               <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #E5E7EB', fontSize: '13px', boxShadow: '0 10px 25px rgba(0,0,0,0.08)' }} />
-              <Area type="monotone" dataKey="docs" stroke="#1F7A63" strokeWidth={2.5} fill="url(#colorDocs)" dot={{ r: 4, fill: '#1F7A63' }} />
+              <Area type="monotone" dataKey="docs" stroke="#2D5444" strokeWidth={2.5} fill="url(#colorDocs)" dot={{ r: 4, fill: '#2D5444' }} />
             </AreaChart>
           </ResponsiveContainer>
         </Card>
@@ -194,7 +194,7 @@ export default function DashboardPage() {
               <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#6B7280' }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fontSize: 12, fill: '#6B7280' }} axisLine={false} tickLine={false} />
               <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #E5E7EB', fontSize: '13px', boxShadow: '0 10px 25px rgba(0,0,0,0.08)' }} />
-              <Bar dataKey="success" fill="#22C55E" radius={[4, 4, 0, 0]} name="Success %" />
+              <Bar dataKey="success" fill="#2D5444" radius={[4, 4, 0, 0]} name="Success %" />
               <Bar dataKey="failed" fill="#FCA5A5" radius={[4, 4, 0, 0]} name="Failed %" />
             </BarChart>
           </ResponsiveContainer>
@@ -207,7 +207,7 @@ export default function DashboardPage() {
               <h3 className="text-sm font-semibold text-dark">Recent Activity</h3>
               <p className="text-xs text-gray mt-0.5">Team activity feed</p>
             </div>
-            <button className="text-xs text-primary-dark font-semibold hover:underline">View All</button>
+            <button className="text-xs text-[#2D5444] font-bold hover:underline">View All</button>
           </div>
           <div className="space-y-4">
             {recentActivity.map((a, i) => (
@@ -220,7 +220,7 @@ export default function DashboardPage() {
                   <div className="flex items-center gap-2 mt-0.5">
                     <span className="text-[10px] text-gray">{a.user}</span>
                     <span className="text-[10px] text-gray">•</span>
-                    <span className="text-[10px] text-gray flex items-center gap-1"><Clock className="w-2.5 h-2.5" />{a.time}</span>
+                    <span className="text-[10px] text-primary-dark flex items-center gap-1"><Clock className="w-2.5 h-2.5" />{a.time}</span>
                   </div>
                 </div>
               </div>
@@ -236,14 +236,14 @@ export default function DashboardPage() {
             <h3 className="text-sm font-semibold text-dark">Recent Documents</h3>
             <p className="text-xs text-gray mt-0.5">Latest processed documents and their status</p>
           </div>
-          <button className="text-xs text-primary-dark font-semibold hover:underline flex items-center gap-1">
+          <button className="text-xs text-[#2D5444] font-bold hover:underline flex items-center gap-1">
             View All <ArrowUpRight className="w-3 h-3" />
           </button>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-primary-soft/70">
+              <tr className="bg-gray-50/50">
                 <th className="text-left py-3 px-5 text-xs font-medium text-gray uppercase tracking-wider">Document</th>
                 <th className="text-left py-3 px-5 text-xs font-medium text-gray uppercase tracking-wider">Type</th>
                 <th className="text-left py-3 px-5 text-xs font-medium text-gray uppercase tracking-wider">Language</th>
@@ -261,8 +261,8 @@ export default function DashboardPage() {
               ].map((doc, i) => (
                 <tr key={i} className="border-t border-gray-50 hover:bg-primary-soft/30 transition">
                   <td className="py-3.5 px-5 font-medium text-dark flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary-deep/5 flex items-center justify-center flex-shrink-0">
-                      <FileText className="w-4 h-4 text-primary-dark" />
+                    <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center flex-shrink-0">
+                      <FileText className="w-4 h-4 text-[#2D5444]" />
                     </div>
                     <span className="truncate max-w-[200px]">{doc.name}</span>
                   </td>
@@ -271,7 +271,7 @@ export default function DashboardPage() {
                   <td className="py-3.5 px-5"><StatusBadge status={doc.status} /></td>
                   <td className="py-3.5 px-5 text-gray text-xs">{doc.time}</td>
                   <td className="py-3.5 px-5">
-                    <button className="p-1.5 rounded-lg hover:bg-primary-deep/10 text-gray hover:text-primary-dark transition" title="View">
+                    <button className="p-1.5 rounded-lg hover:bg-gray-100 text-gray hover:text-[#2D5444] transition" title="View">
                       <Eye className="w-4 h-4" />
                     </button>
                   </td>
@@ -280,15 +280,14 @@ export default function DashboardPage() {
             </tbody>
           </table>
         </div>
-        <div className="flex items-center justify-between px-5 py-3 border-t border-border bg-primary-soft/30">
+        <div className="flex items-center justify-between px-5 py-3 border-t border-border bg-gray-50/30">
           <p className="text-xs text-gray">Showing 8 of 2,847 documents</p>
           <div className="flex items-center gap-1">
             {[1, 2, 3, '...', 142].map((p, i) => (
               <button
                 key={i}
-                className={`w-8 h-8 rounded-lg text-xs font-medium transition ${
-                  p === 1 ? 'bg-primary-dark text-white' : 'hover:bg-gray-100 text-gray'
-                }`}
+                className={`w-8 h-8 rounded-lg text-xs font-medium transition ${p === 1 ? 'bg-[#2D5444] text-white' : 'hover:bg-gray-100 text-gray'
+                  }`}
               >
                 {p}
               </button>
