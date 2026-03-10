@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import type { DocumentContext, UploadSession, UploadedFile, ExtractedData } from '@/types';
 import { extractDocuments } from '@/utils/api';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 interface UploadContextType {
   // Session management
@@ -159,6 +161,31 @@ export function UploadProvider({ children }: { children: ReactNode }) {
               }),
             };
           });
+
+          // Save to Firestore
+          try {
+            const extractionsRef = collection(db, 'extractions');
+            await Promise.all(
+              response.results
+                .filter(r => !r.error)
+                .map(async (result) => {
+                  const extracted = {
+                    docType: ctx?.docType || 'Unknown',
+                    fileName: result.filename,
+                    timestamp: serverTimestamp(),
+                    fields: result.fields || {},
+                    metadata: {
+                      languages: ctx?.languages || [],
+                      description: ctx?.description || '',
+                    }
+                  };
+                  await addDoc(extractionsRef, extracted);
+                })
+            );
+            console.log('Successfully saved extractions to Firestore');
+          } catch (fsErr) {
+            console.error('Error saving to Firestore:', fsErr);
+          }
         } catch (err) {
           const message = err instanceof Error ? err.message : 'Unknown error';
           setSession((s) => {
