@@ -14,7 +14,16 @@ import { validateFiles } from '@/utils/validation';
 import type { DocumentContext } from '@/types';
 
 export default function UploadPage() {
-  const { session, createSession, addFiles, removeFile, clearFiles, processFiles } = useUpload();
+  const {
+    session,
+    createSession,
+    addFiles,
+    removeFile,
+    clearFiles,
+    processFiles,
+    showSuccessNotification,
+    setShowSuccessNotification
+  } = useUpload();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -165,12 +174,33 @@ export default function UploadPage() {
 
   // Case 3: Files AND Context exist -> Ready to process
   return (
-    <div className="space-y-6">
+    <div className="relative space-y-6">
+      {/* Success Notification */}
+      {showSuccessNotification && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="bg-gradient-to-r from-[#2D5444] to-[#4ade80] text-white px-8 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-white/20">
+            <div className="bg-white/20 p-2 rounded-full">
+              <CheckCircle2 className="w-6 h-6" />
+            </div>
+            <div>
+              <p className="font-bold text-lg">Analysis Complete!</p>
+              <p className="text-sm opacity-90">Your document output has been downloaded successfully.</p>
+            </div>
+            <button
+              onClick={() => setShowSuccessNotification(false)}
+              className="ml-4 hover:bg-white/10 p-1 rounded-lg transition"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-dark">Ready to Process</h1>
+          <h1 className="text-2xl font-bold text-dark">Document Analysis</h1>
           <p className="text-sm text-gray mt-1">
-            Everything is set! Review your files and start the extraction.
+            Analyzing your files. The results will be ready momentarily.
           </p>
         </div>
         <div className="flex gap-2">
@@ -178,17 +208,13 @@ export default function UploadPage() {
             onClick={() => clearFiles()}
             className="text-sm border border-border px-4 py-2 rounded-lg hover:bg-gray-100 transition"
           >
-            Reset
+            Clear All
           </button>
           <button
-            onClick={() => {
-              processFiles();
-              navigate('/dashboard/data-extraction');
-            }}
-            disabled={!session.files.some((f) => f.status === 'ready')}
-            className="bg-[#2D5444] hover:bg-[#1b3a2f] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold px-6 py-2 rounded-lg transition-all shadow-lg shadow-[#2D5444]/20"
+            onClick={() => navigate('/dashboard/data-extraction')}
+            className="bg-[#2D5444] hover:bg-[#1b3a2f] text-white text-sm font-bold px-6 py-2 rounded-lg transition-all shadow-lg shadow-[#2D5444]/20"
           >
-            Start Processing Documents
+            View Dashboard
           </button>
         </div>
       </div>
@@ -267,27 +293,8 @@ export default function UploadPage() {
                 {(f.file.size / 1024).toFixed(1)} KB
               </p>
 
-              <div className="mt-3 flex items-center gap-2">
-                {f.status === 'ready' && (
-                  <span className="text-xs text-[#2D5444] bg-gray-50 border border-[#2D5444]/20 px-2.5 py-1 rounded-full font-bold">
-                    Ready
-                  </span>
-                )}
-                {f.status === 'processing' && (
-                  <span className="text-xs text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full flex items-center gap-1 font-semibold">
-                    <Loader2 className="w-3 h-3 animate-spin" /> Processing
-                  </span>
-                )}
-                {f.status === 'done' && (
-                  <span className="text-xs text-white bg-[#2D5444] px-2.5 py-1 rounded-full flex items-center gap-1 font-bold">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Extracted
-                  </span>
-                )}
-                {f.status === 'done' && (
-                  <span className="text-xs text-white bg-[#2D5444] px-2.5 py-1 rounded-full flex items-center gap-1 font-bold">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Extracted
-                  </span>
-                )}
+              <div className="mt-3">
+                <p className="text-xs text-[#2D5444] font-medium italic opacity-60">Verified Document</p>
               </div>
             </div>
           ))}

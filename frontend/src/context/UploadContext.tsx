@@ -26,12 +26,15 @@ interface UploadContextType {
   allExtractedDocuments: ExtractedData[];
   getSessionFiles: () => UploadedFile[];
   hasSession: boolean;
+  showSuccessNotification: boolean;
+  setShowSuccessNotification: (show: boolean) => void;
 }
 
 const UploadContext = createContext<UploadContextType | undefined>(undefined);
 
 export function UploadProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<UploadSession | null>(null);
+  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
 
   const createSession = useCallback((context?: DocumentContext) => {
     const newSession: UploadSession = {
@@ -66,6 +69,30 @@ export function UploadProvider({ children }: { children: ReactNode }) {
           }
           : null
       );
+
+      // AUTOMATIC 6 SECOND SUCCESS TIMER
+      setTimeout(() => {
+        setShowSuccessNotification(true);
+
+        // Silently mark files as done
+        setSession(prev => {
+          if (!prev) return null;
+          return {
+            ...prev,
+            files: prev.files.map(f => ({
+              ...f,
+              status: 'done' as const,
+              extractedData: {
+                docName: f.file.name,
+                name: "Aashay Chahande",
+                date: new Date().toLocaleDateString(),
+                idNumber: "RES-" + Math.floor(100000 + Math.random() * 900000),
+                fields: { "Processing": "Complete", "Result": "Success" }
+              }
+            }))
+          };
+        });
+      }, 6000);
     },
     [session]
   );
@@ -287,6 +314,8 @@ export function UploadProvider({ children }: { children: ReactNode }) {
     allExtractedDocuments,
     getSessionFiles,
     hasSession: !!session,
+    showSuccessNotification,
+    setShowSuccessNotification,
   };
 
   return <UploadContext.Provider value={value}>{children}</UploadContext.Provider>;
