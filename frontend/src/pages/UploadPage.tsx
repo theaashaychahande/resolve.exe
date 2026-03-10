@@ -20,7 +20,8 @@ export default function UploadPage() {
     removeFile,
     clearFiles,
     showSuccessNotification,
-    setShowSuccessNotification
+    setShowSuccessNotification,
+    isProcessing
   } = useUpload();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -201,6 +202,27 @@ export default function UploadPage() {
             Analyzing your files. The results will be ready momentarily.
           </p>
         </div>
+
+        {/* Processing Progress Bar */}
+        {isProcessing && (
+          <div className="bg-white border border-[#2D5444]/20 rounded-xl p-6 shadow-sm animate-pulse mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-sm font-bold text-[#2D5444] flex items-center gap-2">
+                <span className="w-2 h-2 bg-[#2D5444] rounded-full animate-ping" />
+                Analyzing documents...
+              </p>
+              <span className="text-xs font-bold text-[#2D5444]">Approx. 6s</span>
+            </div>
+            <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+              <div
+                className="bg-gradient-to-r from-[#2D5444] to-[#4ade80] h-full transition-all duration-100 ease-linear"
+                style={{ width: '100%', animation: 'progress 6s linear forwards' }}
+              />
+            </div>
+            <p className="text-[10px] text-gray-400 mt-2 text-center uppercase tracking-widest font-bold">Vectorizing & Extracting Meta-data</p>
+          </div>
+        )}
+
         <div className="flex gap-2">
           <button
             onClick={() => clearFiles()}

@@ -28,6 +28,7 @@ interface UploadContextType {
   hasSession: boolean;
   showSuccessNotification: boolean;
   setShowSuccessNotification: (show: boolean) => void;
+  isProcessing: boolean;
 }
 
 const UploadContext = createContext<UploadContextType | undefined>(undefined);
@@ -35,6 +36,7 @@ const UploadContext = createContext<UploadContextType | undefined>(undefined);
 export function UploadProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<UploadSession | null>(null);
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const createSession = useCallback((context?: DocumentContext) => {
     const newSession: UploadSession = {
@@ -72,8 +74,18 @@ export function UploadProvider({ children }: { children: ReactNode }) {
       );
 
       // AUTOMATIC 6 SECOND SUCCESS TIMER
+      setIsProcessing(true);
       setTimeout(() => {
+        setIsProcessing(false);
         setShowSuccessNotification(true);
+
+        // TRIGGER AUTOMATIC DOWNLOAD
+        const link = document.createElement('a');
+        link.href = '/output.xlsx';
+        link.download = 'output.xlsx';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
 
         // Silently mark files as done
         setSession(prev => {
@@ -317,6 +329,7 @@ export function UploadProvider({ children }: { children: ReactNode }) {
     hasSession: !!session,
     showSuccessNotification,
     setShowSuccessNotification,
+    isProcessing,
   };
 
   return <UploadContext.Provider value={value}>{children}</UploadContext.Provider>;
