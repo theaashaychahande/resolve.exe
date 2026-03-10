@@ -31,7 +31,6 @@ st.set_page_config(
     layout="wide"
 )
 
-
 st.markdown("""
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
