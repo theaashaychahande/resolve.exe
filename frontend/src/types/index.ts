@@ -62,6 +62,7 @@ export interface UploadSession {
   context: DocumentContext | null;
   files: UploadedFile[];
   createdAt: Date;
+  excelUrl?: string;
 }
 
 /** Individual uploaded file with extraction data */

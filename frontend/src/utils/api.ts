@@ -22,6 +22,7 @@ export interface FileExtractionResult {
 
 export interface ExtractionResponse {
     results: FileExtractionResult[];
+    excelUrl?: string;
 }
 
 /**

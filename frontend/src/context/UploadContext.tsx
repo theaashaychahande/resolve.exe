@@ -133,6 +133,7 @@ export function UploadProvider({ children }: { children: ReactNode }) {
             if (!s) return null;
             return {
               ...s,
+              excelUrl: response.excelUrl,
               files: s.files.map((f) => {
                 if (f.status !== 'processing') return f;
                 const result = resultMap.get(f.file.name);

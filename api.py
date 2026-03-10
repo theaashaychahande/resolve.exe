@@ -6,8 +6,12 @@ so the React frontend can call it.
 
 import os
 import json
+import asyncio
+import time
 from io import BytesIO
 from typing import List
+
+import pandas as pd
 
 import cv2
 import numpy as np
@@ -20,6 +24,7 @@ import requests as http_requests
 
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 # ---------------------------------------------------------------------------
 # Setup
@@ -47,6 +52,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve the output folder so files can be downloaded
+if not os.path.exists("output"):
+    os.makedirs("output")
+app.mount("/output", StaticFiles(directory="output"), name="output")
 
 # ---------------------------------------------------------------------------
 # Core logic (mirrors app.py)
@@ -205,4 +215,28 @@ async def extract(
             "fields": extracted,
         })
 
-    return {"results": results}
+    # Aggregate results for Excel
+    all_rows = []
+    for r in results:
+        if "fields" in r and isinstance(r["fields"], dict):
+            row = {"filename": r["filename"]}
+            row.update({str(k): str(v) for k, v in r["fields"].items()})
+            all_rows.append(row)
+
+    if all_rows:
+        # User specified "after 15 sec" delay
+        await asyncio.sleep(15)
+        
+        df = pd.DataFrame(all_rows)
+        output_dir = "output"
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        
+        excel_path = os.path.join(output_dir, "output.xlsx")
+        df.to_excel(excel_path, index=False)
+        print(f"Generated Excel output at {excel_path}")
+
+    return {
+        "results": results,
+        "excelUrl": "/output/output.xlsx" if all_rows else None
+    }

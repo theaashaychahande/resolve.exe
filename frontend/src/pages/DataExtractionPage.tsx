@@ -80,11 +80,25 @@ export default function DataExtractionPage() {
   return (
     <div className="space-y-6">
       {/* Page header */}
-      <div>
-        <h1 className="text-2xl font-bold text-dark">Extracted Data</h1>
-        <p className="text-sm text-gray mt-1">
-          View and manage all extracted document data.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-dark">Extracted Data</h1>
+          <p className="text-sm text-gray mt-1">
+            View and manage all extracted document data.
+          </p>
+        </div>
+
+        {session?.excelUrl && (
+          <a
+            href={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${session.excelUrl}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all shadow-sm"
+          >
+            <Download className="w-4 h-4" />
+            Download Report (Excel)
+          </a>
+        )}
       </div>
 
       {/* Filters */}
@@ -105,11 +119,10 @@ export default function DataExtractionPage() {
             <button
               key={s}
               onClick={() => setFilterStatus(s)}
-              className={`text-xs font-medium px-3 py-1.5 rounded-lg transition ${
-                filterStatus === s
+              className={`text-xs font-medium px-3 py-1.5 rounded-lg transition ${filterStatus === s
                   ? 'bg-primary-dark text-white'
                   : 'bg-white border border-border text-gray hover:border-primary-dark/30'
-              }`}
+                }`}
             >
               {s}
             </button>
@@ -206,9 +219,8 @@ export default function DataExtractionPage() {
             {[1].map((p) => (
               <button
                 key={p}
-                className={`w-8 h-8 rounded-lg text-xs font-medium transition ${
-                  p === 1 ? 'bg-primary-dark text-white' : 'hover:bg-gray-100 text-gray'
-                }`}
+                className={`w-8 h-8 rounded-lg text-xs font-medium transition ${p === 1 ? 'bg-primary-dark text-white' : 'hover:bg-gray-100 text-gray'
+                  }`}
               >
                 {p}
               </button>
