@@ -77,29 +77,54 @@ export default function DataExtractionPage() {
     );
   }
 
+  const isProcessing = allFiles.some((f) => f.status === 'processing');
+  const isFinalizing = !isProcessing && allFiles.length > 0 && !session?.excelUrl && allFiles.some(f => f.status === 'done');
+
   return (
     <div className="space-y-6">
       {/* Page header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-dark">Extracted Data</h1>
+          <h1 className="text-2xl font-bold text-dark">Document Analysis Results</h1>
           <p className="text-sm text-gray mt-1">
-            View and manage all extracted document data.
+            {isProcessing ? 'Processing your documents...' : isFinalizing ? 'Aggregating data into Excel report...' : 'Your data has been extracted and is ready for export.'}
           </p>
         </div>
+      </div>
 
-        {session?.excelUrl && (
+      {/* Legit Output Section */}
+      {session?.excelUrl ? (
+        <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-100 p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-green-600 flex items-center justify-center text-white shadow-lg">
+              <Download className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-green-900">Reports Generated Successfully</h3>
+              <p className="text-sm text-green-700">Combined data from {allFiles.length} documents is ready in Excel format.</p>
+            </div>
+          </div>
           <a
             href={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${session.excelUrl}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all shadow-sm"
+            className="w-full md:w-auto flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-3 rounded-xl transition-all shadow-md active:scale-95"
           >
-            <Download className="w-4 h-4" />
-            Download Report (Excel)
+            <Download className="w-5 h-5" />
+            Export as Excel Sheets
           </a>
-        )}
-      </div>
+        </Card>
+      ) : (isProcessing || isFinalizing) && (
+        <Card className="p-6 border-blue-100 bg-blue-50/30 flex items-center gap-4 animate-pulse">
+          <div className="w-10 h-10 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin" />
+          <div>
+            <h3 className="text-md font-semibold text-blue-900">
+              {isProcessing ? 'Extracting AI Data...' : 'Finalizing Excel Report (Wait 15s)...'}
+            </h3>
+            <p className="text-xs text-blue-700">Please do not refresh the page while we finalize your output.</p>
+          </div>
+        </Card>
+      )}
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
@@ -120,8 +145,8 @@ export default function DataExtractionPage() {
               key={s}
               onClick={() => setFilterStatus(s)}
               className={`text-xs font-medium px-3 py-1.5 rounded-lg transition ${filterStatus === s
-                  ? 'bg-primary-dark text-white'
-                  : 'bg-white border border-border text-gray hover:border-primary-dark/30'
+                ? 'bg-primary-dark text-white'
+                : 'bg-white border border-border text-gray hover:border-primary-dark/30'
                 }`}
             >
               {s}
@@ -193,9 +218,14 @@ export default function DataExtractionPage() {
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button
-                        disabled={row.status !== 'Completed'}
+                        onClick={() => {
+                          if (session?.excelUrl) {
+                            window.open(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}${session.excelUrl}`, '_blank');
+                          }
+                        }}
+                        disabled={!session?.excelUrl || row.status !== 'Completed'}
                         className="p-1.5 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-amber-50 text-gray hover:text-amber-600 transition"
-                        title="Export"
+                        title="Download Excel Report"
                       >
                         <Download className="w-4 h-4" />
                       </button>
