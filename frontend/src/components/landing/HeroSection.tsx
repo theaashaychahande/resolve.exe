@@ -79,12 +79,14 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mb-8">
-              <Link
-                to="/dashboard/upload"
+              <a
+                href="http://localhost:8501"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 bg-[#2D5444] hover:bg-[#1b3a2f] text-white font-bold px-9 py-4.5 rounded-xl shadow-xl shadow-[#2D5444]/30 transition-all hover:shadow-2xl hover:shadow-[#2D5444]/40 hover:-translate-y-0.5 text-base"
               >
                 Start Free <ArrowRight className="w-5 h-5" />
-              </Link>
+              </a>
             </div>
 
             {/* Trust signals */}

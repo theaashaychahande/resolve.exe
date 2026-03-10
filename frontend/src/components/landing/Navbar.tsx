@@ -69,12 +69,14 @@ export default function Navbar() {
             >
               Sign In
             </Link>
-            <Link
-              to="/dashboard/upload"
+            <a
+              href="http://localhost:8501"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center bg-[#2D5444] hover:bg-[#1b3a2f] text-white font-bold px-8 py-2.5 rounded-xl shadow-lg shadow-[#2D5444]/10 transition-all text-[15px]"
             >
               Start Free
-            </Link>
+            </a>
           </div>
 
           {/* Mobile menu toggle */}
@@ -100,12 +102,14 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
-          <Link
-            to="/dashboard/upload"
+          <a
+            href="http://localhost:8501"
+            target="_blank"
+            rel="noopener noreferrer"
             className="block w-full text-center text-sm font-medium text-white bg-[#2D5444] px-5 py-2.5 rounded-lg"
           >
             Start Free
-          </Link>
+          </a>
         </div>
       )}
     </nav>
