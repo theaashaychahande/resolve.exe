@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
 import type { DocumentContext, UploadSession, UploadedFile, ExtractedData } from '@/types';
-import { extractDocuments } from '@/utils/api';
+import { extractDocuments, API_BASE_URL } from '@/utils/api';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -133,7 +133,7 @@ export function UploadProvider({ children }: { children: ReactNode }) {
             if (!s) return null;
             return {
               ...s,
-              excelUrl: response.excelUrl,
+              excelUrl: response.excelUrl ? `${API_BASE_URL}${response.excelUrl}` : undefined,
               files: s.files.map((f) => {
                 if (f.status !== 'processing') return f;
                 const result = resultMap.get(f.file.name);

@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   FileImage,
   FileText,
@@ -15,6 +16,7 @@ import type { DocumentContext } from '@/types';
 export default function UploadPage() {
   const { session, createSession, addFiles, removeFile, clearFiles, processFiles } = useUpload();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleFormSubmit = (context: DocumentContext) => {
     createSession(context);
@@ -178,13 +180,16 @@ export default function UploadPage() {
           >
             Reset
           </button>
-            <button
-              onClick={() => processFiles()}
-              disabled={!session.files.some((f) => f.status === 'ready')}
-              className="bg-[#2D5444] hover:bg-[#1b3a2f] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold px-6 py-2 rounded-lg transition-all shadow-lg shadow-[#2D5444]/20"
-            >
-              Start Processing Documents
-            </button>
+          <button
+            onClick={() => {
+              processFiles();
+              navigate('/dashboard/data-extraction');
+            }}
+            disabled={!session.files.some((f) => f.status === 'ready')}
+            className="bg-[#2D5444] hover:bg-[#1b3a2f] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold px-6 py-2 rounded-lg transition-all shadow-lg shadow-[#2D5444]/20"
+          >
+            Start Processing Documents
+          </button>
         </div>
       </div>
 
