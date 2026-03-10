@@ -42,6 +42,7 @@ export function UploadProvider({ children }: { children: ReactNode }) {
       context: context || null,
       files: [],
       createdAt: new Date(),
+      excelUrl: '/output.xlsx',
     };
     setSession(newSession);
   }, []);

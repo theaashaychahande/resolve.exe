@@ -75,7 +75,7 @@ export default function DataExtractionPage() {
     );
   }
 
-  const excelDownloadUrl = session?.excelUrl || `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/output/output.xlsx`;
+  const excelDownloadUrl = session?.excelUrl || '/output.xlsx';
 
   return (
     <div className="space-y-6">
