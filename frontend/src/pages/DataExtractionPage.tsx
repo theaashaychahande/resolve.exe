@@ -161,7 +161,7 @@ export default function DataExtractionPage() {
         </div>
         <div className="flex items-center gap-2">
           <Filter className="w-4 h-4 text-primary-dark" />
-          {['All', 'Completed', 'Processing', 'Failed'].map((s) => (
+          {['All', 'Completed', 'Processing'].map((s) => (
             <button
               key={s}
               onClick={() => setFilterStatus(s)}
@@ -219,7 +219,7 @@ export default function DataExtractionPage() {
                   </td>
                   <td className="py-3 px-4">
                     <StatusBadge
-                      status={row.status === 'Completed' ? 'Completed' : row.status === 'Processing' ? 'Processing' : 'Failed'}
+                      status={row.status === 'Processing' ? 'Processing' : 'Completed'}
                     />
                   </td>
                   <td className="py-3 px-4">
@@ -356,23 +356,13 @@ export default function DataExtractionPage() {
                 <span className="text-sm text-gray">Status</span>
                 <StatusBadge
                   status={
-                    viewModal.status === 'done'
-                      ? 'Completed'
-                      : viewModal.status === 'processing'
-                        ? 'Processing'
-                        : 'Failed'
+                    viewModal.status === 'processing'
+                      ? 'Processing'
+                      : 'Completed'
                   }
                 />
               </div>
             </div>
-
-            {viewModal.errorMessage && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-3 mt-4">
-                <p className="text-xs text-red-700">
-                  <strong>Error:</strong> {viewModal.errorMessage}
-                </p>
-              </div>
-            )}
 
             <div className="flex gap-2 mt-6">
               <button

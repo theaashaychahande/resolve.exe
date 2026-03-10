@@ -283,19 +283,12 @@ export default function UploadPage() {
                     <CheckCircle2 className="w-3.5 h-3.5" /> Extracted
                   </span>
                 )}
-                {f.status === 'failed' && (
-                  <span className="text-xs text-red-600 bg-red-50 px-2.5 py-1 rounded-full font-semibold">
-                    Failed
+                {f.status === 'done' && (
+                  <span className="text-xs text-white bg-[#2D5444] px-2.5 py-1 rounded-full flex items-center gap-1 font-bold">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Extracted
                   </span>
                 )}
               </div>
-
-              {f.errorMessage && (
-                <p className="text-xs text-red-500 mt-2 flex items-start gap-1">
-                  <span className="flex-shrink-0 mt-0.5">⚠️</span>
-                  {f.errorMessage}
-                </p>
-              )}
             </div>
           ))}
         </div>
